@@ -14,12 +14,7 @@ void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, i
 // fct pour vérifier si une equipe est KO
 int equipe_est_KO(Combattant *equipe, int taille) {
     for (int i = 0; i < taille; i++) {
-        if (!equipe[i].est_KO) {
-            return 0;  // L'equipe n'est pas KO
-        }
-    }
-    return 1;  // L'equipe est KO
-}
+
 
 // Calcule les dégâts en fonction de l'attaque, la défense, et l'element
 void attaque_normale(Combattant *attaquant, Combattant *cible) {
