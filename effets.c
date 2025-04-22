@@ -1,4 +1,4 @@
-#include "types.h" //en supposant que Lina a appelé comme ca le fichier qui contient les structures pour les elements, effet spectiaux, combattants
+#include "effets.h"
 #include <stdio.h>
 
 //suppsons brulure, poisson, gel, stun, paralysie, aucuneffet etc etre une valeur de type Effet dans le fichier types.h
@@ -30,7 +30,7 @@ void appliquerEffetElementaire(Combattant *cible, Effetspecial effet) {
 
 
 //fct pour appliquer les degats à chaque tour 
-void appliquerdegats(Combattant *c){
+void appliquerDegats(Combattant *c){
     switch (c->effet) {
         case POISON:
             c->pv -= 10; // Le poison inflige 10 PV de dégâts par tour
