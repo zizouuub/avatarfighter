@@ -2,15 +2,14 @@
 #include <stdio.h> 
 #include "effets.h"
 #include <string.h>
-#define MAX_NOM 50 //taille du nom
-#define MAX_DESC 150 //Description de la technique
+#define MAX_NOM 50 // taille nom
+#define MAX_DESC 150 // taille description
 
 
 typedef enum {
     FEU, EAU, TERRE, AIR
 } Element;
 
-// Effets possibles des techniques spéciales
 typedef enum {
     ATTAQUE, DEFENSE, PV, AGILITE, VITESSE, STUN, SOIN, BRULURE, CONTRE, SILENCE
 } EffetType;
@@ -20,11 +19,11 @@ typedef enum {
 typedef struct {
     char nom[MAX_NOM];
     char description[MAX_DESC];
-    EffetType effet;     // texte dans le fichier ex : "ATTAQUE" "DEFENSE"
+    EffetType effet; 
     int valeur;
-    int duree;           // en tours
+    int duree; // en tours
     int recharge;
-    int tours_restant;   // à initialiser à 0 à la lecture
+    int tours_restant; // à initialiser à 0 à la lecture
 } TechniqueSpeciale;
 
 
@@ -36,5 +35,5 @@ typedef struct {
     int defense;
     int agilite;
     int vitesse;
-    TechniqueSpeciale techniques[3];  //fixe à 3 techniques
+    TechniqueSpeciale techniques[3]; //fixe à 3 techniques
 } Combattant;
