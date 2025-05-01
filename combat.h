@@ -2,8 +2,8 @@
 #include <stdio.h> 
 #include "effets.h"
 #include <string.h>
-#define MAX_NOM 50 // taille nom
-#define MAX_DESC 150 // taille description
+#define MAX_NOM 50 
+#define MAX_DESC 150 
 
 
 typedef enum {
