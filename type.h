@@ -1,26 +1,17 @@
+
+#include <stdio.h> 
 #include <string.h>
-#include <stdio.h>
 #define MAX_NOM 50 
 #define MAX_DESC 150 
+#define nb_effet 3
+
 
 typedef enum {
-    FEU, 
-    EAU,
-    TERRE,
-    AIR
+    FEU, EAU, TERRE, AIR
 } Element;
 
 typedef enum {
-    ATTAQUE, 
-    DEFENSE, 
-    PV, 
-    AGILITE, 
-    STUN, 
-    GEL,
-    POISON,
-    SOIN, 
-    BRULURE, 
-    CONTRE, 
+    AUCUN, ATTAQUE, DEFENSE, PV, AGILITE, STUN, SOIN, BRULURE, CONTRE, POISON
 } EffetType;
 
 
@@ -30,7 +21,6 @@ typedef struct {
     char description[MAX_DESC];
     EffetType effet; 
     int valeur;
-    int nbeffet =13; // nombre d'effets possibles
     int duree; // en tours
     int recharge;
     int tours_restant; // à initialiser à 0 à la lecture
