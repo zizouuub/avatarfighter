@@ -3,7 +3,7 @@
 #include <string.h>
 #define MAX_NOM 50 
 #define MAX_DESC 150 
-#define nb_effet 3
+
 
 
 typedef enum {
