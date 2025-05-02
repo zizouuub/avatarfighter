@@ -35,5 +35,6 @@ typedef struct {
     int defense;
     int agilite;
     int vitesse;
+    int est_KO;
     TechniqueSpeciale techniques[3]; //fixe à 3 techniques
 } Combattant;
