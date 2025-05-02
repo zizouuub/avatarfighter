@@ -29,7 +29,7 @@ Agilite: 6
 Vitesse: 14
 Technique: Lame d’eau | Attaque tranchante | ATTAQUE | 10 | 0 | 0
 Technique: Vague curative | Soigne un allié | SOIN | 20 | 0 | 2
-Technique: Gel profond | Immobilise l’adversaire | STUN | 0 | 1 | 4
+Technique: Gel profond | Immobilise l’adversaire | GEL | 0 | 1 | 4
 
 Nom: Sokka
 Element: EAU
@@ -40,7 +40,7 @@ Agilite: 5
 Vitesse: 12
 Technique: Aiguilles de glace | Attaque ciblée | ATTAQUE | 12 | 0 | 0
 Technique: Barrière polaire | Défense d’un allié | DEFENSE | 10 | 2 | 3
-Technique: Blizzard | Réduction de l’attaque ennemie | ATTAQUE | -5 | 2 | 4
+Technique: Blizzard | Réduction de l’attaque ennemie | GEL | -5 | 2 | 4
 
 Nom: Toph
 Element: TERRE
@@ -62,7 +62,7 @@ Agilite: 4
 Vitesse: 13
 Technique: Coup durci | Attaque simple | ATTAQUE | 12 | 0 | 0
 Technique: Armure vivante | Riposte auto | CONTRE | 0 | 1 | 3
-Technique: Onde tellurique | Ralentit l’adversaire | VITESSE | -5 | 2 | 4
+Technique: Onde tellurique | Ralentit l’adversaire | STUN | -5 | 2 | 4
 
 Nom: Aang
 Element: AIR
@@ -73,7 +73,7 @@ Agilite: 8
 Vitesse: 25
 Technique: Coup de vent | Double frappe | ATTAQUE | 8 | 0 | 0
 Technique: Esquive absolue | Immunité 1 tour | AGILITE | 15 | 1 | 3
-Technique: Tornade | Baisse vitesse ennemie | VITESSE | -10 | 2 | 4
+Technique: Tornade | Baisse vitesse ennemie | POISON | -10 | 2 | 4
 
 Nom: Sahn
 Element: AIR
@@ -82,6 +82,6 @@ Attaque: 26
 Defense: 6
 Agilite: 7
 Vitesse: 28
-Technique: Frappe tournoyante | Attaque + esquive | AGILITE | 10 | 1 | 2
-Technique: Silence du ciel | Bloque technique adverse | SILENCE | 0 | 1 | 3
-Technique: Typhon | Grosse attaque ciblée | ATTAQUE | 25 | 0 | 4
+Technique: Frappe tournoyante | Attaque + esquive | ATTAQUE | 10 | 1 | 2
+Technique: Silence du ciel | Bloque technique adverse | DEFENSE | 0 | 1 | 3
+Technique: Typhon | Grosse attaque ciblée | POISON | 25 | 0 | 4
