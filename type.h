@@ -11,7 +11,7 @@ typedef enum {
 } Element;
 
 typedef enum {
-    AUCUN, ATTAQUE, DEFENSE, PV, AGILITE, STUN, SOIN, BRULURE, CONTRE, POISON
+    AUCUN, ATTAQUE, DEFENSE, PV, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
 } EffetType;
 
 
