@@ -2,7 +2,8 @@
 #include <stdio.h> 
 #include <string.h>
 #define MAX_NOM 50 
-#define MAX_DESC 150 
+#define MAX_DESC 150
+#define NB_EFFETS 13 // Nombre d'effets possibles
 
 
 
