@@ -1,5 +1,4 @@
 
-
 #include <stdio.h> 
 #include <string.h>
 #define MAX_NOM 50 
@@ -13,7 +12,7 @@ typedef enum {
 } Element;
 
 typedef enum {
-    AUCUN, ATTAQUE, DEFENSE, PV, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
+    AUCUN, ATTAQUE, DEFENSE, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
 } EffetType;
 
 
@@ -31,6 +30,7 @@ typedef struct {
     char nom[MAX_NOM];
     Element element;
     int pv_max;
+    int pv;
     int attaque;
     int defense;
     int agilite;
