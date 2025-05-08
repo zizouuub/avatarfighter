@@ -1,5 +1,8 @@
 #include "type.h" 
 
+// Initialise un combattant avec des valeurs par défaut
+void initialiser_combattant(Combattant *c);
+
 // Applique un effet élémentaire à une cible 
 void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet);
 
@@ -11,3 +14,4 @@ void mettreAJourEffets(Combattant *combattant, TechniqueSpeciale *tech);
 
 // Retourne un multiplicateur de dégâts selon l’effet 
 float multiplicateur(EffetType e);
+
