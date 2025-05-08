@@ -4,17 +4,24 @@
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
     // Initialisation des compteurs de tour et des effets
     for (int i = 0; i < taille1; i++) {
-        equipe1[i].est_KO = 0;
+        initialiser_combattant(&equipe1[i]);
+        equipe1[i].pv = equipe1[i].pv_max;
     }
     for (int i = 0; i < taille2; i++) {
-        equipe2[i].est_KO = 0;
+        initialiser_combattant(&equipe2[i]);
+        equipe2[i].pv = equipe2[i].pv_max;
     }
 }
 
 // fct pour vérifier si une equipe est KO
 int equipe_est_KO(Combattant *equipe, int taille) {
     for (int i = 0; i < taille; i++) {
-
+        if (!equipe[i].est_KO) { //choisir le premier qui n’est pas K.O
+            return 0;  // L'equipe n'est pas KO
+        }
+    }
+    return 1;  // L'equipe est KO
+}
 
 // Calcule les dégâts en fonction de l'attaque, la défense, et l'element
 void attaque_normale(Combattant *attaquant, Combattant *cible) {
@@ -23,8 +30,8 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
         degats = 0; // minimum 0 dégâts
     }
     // Multiplie les dégâts selon le type d'element 
-    int multipli = multiplicateur(attaquant->element, cible->element);
-    degats *= multipli;
+    float multipli = multiplicateur(attaquant->element, cible->element);
+    degats = degats * multipli;
     // Applique les dégâts
     cible->pv -= degats;
     // Si la cible est à 0 PV ou moins, elle est KO
@@ -38,14 +45,17 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
     }
 }
 
+
 // Un joueur effectue une action pendant son tour
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires) {
+    TechniqueSpeciale *tech;
     if (joueur->est_KO){
         printf("⚠️ %s est KO et ne peut pas agir !\n", joueur->nom);
         return; // ne fait rien s'il est KO
     } 
-    // Met à jour les effets temporaires comme la brûlure
-    mettreAJourEffets(joueur);
+    // applique effets subis
+    appliquerDegats(joueur); //degats des effets 
+    mettreAJourEffets(joueur, tech); // On peut choisir la technique à utiliser
     // Trouve la première cible ennemie encore vivante
     Combattant *cible = NULL;
     for (int i = 0; i < taille_adversaires; i++) {
@@ -60,26 +70,38 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     }
 }
 
+
 // Gère l'ensemble du combat entre deux équipes
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
+    printf("\n💥 🎮 Début du combat !\n");
+    int tour = 1; // Compteur de tours
     // Tant qu'une équipe n'est pas KO
     while (equipe_est_KO(equipe1, taille1) == 0 && equipe_est_KO(equipe2, taille2) == 0) {
-        // S'il appartient à l'équipe 1 → il attaque l'équipe 2
-        if (joueur != NULL) {
-            // Vérification si le joueur appartient à l'équipe 1 ou 2
-            if (joueur >= equipe1 && joueur < equipe1 + taille1) {
-                // Le joueur est dans l'équipe 1, il attaque l'équipe 2
-                effectuer_tour(joueur, equipe2, taille2);
-            } else {
-                // Le joueur est dans l'équipe 2, il attaque l'équipe 1
-                effectuer_tour(joueur, equipe1, taille1);
+        printf("\n🔁 Tour %d\n", tour);
+        // Tous les combattants de l’équipe 1 jouent
+        for (int i = 0; i < taille1; i++) { 
+            if (!equipe1[i].est_KO) { // Si le combattant n'est pas KO
+                effectuer_tour(&equipe1[i], equipe2, taille2);
+                }
             }
+        // On vérifie si l'équipe 2 est éliminée avant de continuer
+        if (equipe_est_KO(equipe2, taille2)){
+            break; // Sort de la boucle si l'équipe 2 est KO
         }
-    }
+        // Tous les combattants de l’équipe 2 jouent
+        for (int i = 0; i < taille2; i++) {
+            if (!equipe2[i].est_KO) {
+                effectuer_tour(&equipe2[i], equipe1, taille1);
+                }
+            }
+            tour++;
+        }
     // Fin du combat : affiche le gagnant
+    printf("\n🎯 Fin du combat !\n");
     if (equipe_est_KO(equipe1, taille1)) {
         printf("🏆 L'équipe 2 a gagné !\n");
     } else {
         printf("🏆 L'équipe 1 a gagné !\n");
     }
 }
+
