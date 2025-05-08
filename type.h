@@ -1,5 +1,6 @@
 #define MAX_STR 50
-#define MAX_TECHS 3  // Nombre de techniques par personnage
+#define MAX_TECHS 3      // Nombre de techniques par personnage
+#define NB_EFFETS 13     // Nombre d'effets possibles
 
 // Enumération pour les éléments
 typedef enum {
@@ -13,22 +14,26 @@ typedef enum {
 
 // Structure pour représenter une technique spéciale
 typedef struct {
-    char nom[MAX_STR];     // Nom de la technique
-    char type[MAX_STR];    // Type de la technique (attaque, défense, etc.)
-    int puissance;         // Puissance de la technique
-    int portee;            // Portée de la technique
-    int tours;             // Nombre de tours de l'effet de la technique
+    char nom[MAX_STR];       // Nom de la technique
+    char type[MAX_STR];      // Type (attaque, défense...)
+    int puissance;           // Dégâts ou valeur de l'effet
+    int portee;              // Portée
+    int tours;               // Durée de l'effet
+    EffetType effet;         // Type d'effet appliqué (ex : POISON, BRULURE...)
 } TechniqueSpeciale;
 
 // Structure pour représenter un combattant
 typedef struct {
-    char nom[MAX_STR];     // Nom du personnage
-    Element element;       // Élément (Feu, Eau, Terre, Air)
-    int pv_max;            // Points de vie maximum
-    int pv;                // Points de vie actuels
-    int attaque;           // Attaque
-    int defense;           // Défense
-    int agilite;           // Agilité
-    int vitesse;           // Vitesse
+    char nom[MAX_STR];                       // Nom
+    Element element;                         // Élément (Feu, Eau...)
+    int pv_max;                              // PV max
+    int pv;                                  // PV actuels
+    int attaque;                             // Attaque
+    int defense;                             // Défense
+    int agilite;                             // Agilité
+    int vitesse;                             // Vitesse
+    int est_KO;                              // KO = 1 si mort
+    EffetType effets[NB_EFFETS];             // Liste des effets actifs
+    int duree_effet[NB_EFFETS];              // Durées des effets
     TechniqueSpeciale techniques[MAX_TECHS]; // Techniques spéciales
 } Combattant;
