@@ -11,7 +11,7 @@ typedef enum {
     AUCUN, ATTAQUE, DEFENSE, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
 } EffetType;
 
-// Structure pour représenter une technique
+// Structure pour représenter une technique spéciale
 typedef struct {
     char nom[MAX_STR];     // Nom de la technique
     char type[MAX_STR];    // Type de la technique (attaque, défense, etc.)
@@ -20,14 +20,15 @@ typedef struct {
     int tours;             // Nombre de tours de l'effet de la technique
 } TechniqueSpeciale;
 
-// Structure pour représenter un personnage
+// Structure pour représenter un combattant
 typedef struct {
     char nom[MAX_STR];     // Nom du personnage
-    char element[MAX_STR]; // Élément (Feu, Eau, Terre, Air)
+    Element element;       // Élément (Feu, Eau, Terre, Air)
     int pv_max;            // Points de vie maximum
+    int pv;                // Points de vie actuels
     int attaque;           // Attaque
     int defense;           // Défense
     int agilite;           // Agilité
     int vitesse;           // Vitesse
-    Technique techniques[MAX_TECHS]; // Techniques spéciales
+    TechniqueSpeciale techniques[MAX_TECHS]; // Techniques spéciales
 } Combattant;
