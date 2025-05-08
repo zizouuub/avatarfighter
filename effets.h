@@ -1,13 +1,13 @@
-#include "types.h" // en supposant que Lina a appelé comme ca le fichier qui contient les structures pour les elements, effet spectiaux, combattants
+#include "type.h" 
 
 // Applique un effet élémentaire à une cible 
-void appliquerEffetElementaire(Combattant *cible, Effetspecial effet);
+void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet);
 
 // Applique les dégâts ou conséquences d'un effet 
 void appliquerdegats(Combattant *c);
 
 // Met à jour la durée des effets
-void mettreAJourEffets(Combattant *c);
+void mettreAJourEffets(Combattant *combattant, TechniqueSpeciale *tech);
 
 // Retourne un multiplicateur de dégâts selon l’effet 
-float multiplicateur(Effet e);
+float multiplicateur(EffetType e);
