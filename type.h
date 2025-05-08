@@ -1,42 +1,33 @@
+#define MAX_STR 50
+#define MAX_TECHS 3  // Nombre de techniques par personnage
 
-#include <stdio.h> 
-#include <string.h>
-#define MAX_NOM 50 
-#define MAX_DESC 150 
-#define NB_EFFETS 13 // Nombre d'effets possibles
-
-
-
+// Enumération pour les éléments
 typedef enum {
     FEU, EAU, TERRE, AIR
 } Element;
 
+// Enumération pour les types d'effets d'une technique
 typedef enum {
     AUCUN, ATTAQUE, DEFENSE, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
 } EffetType;
 
-
+// Structure pour représenter une technique
 typedef struct {
-    char nom[MAX_NOM];
-    char description[MAX_DESC];
-    int valeur;
-    int duree; // en tours
-    int recharge;
-    int tours_restant; // à initialiser à 0 à la lecture
+    char nom[MAX_STR];     // Nom de la technique
+    char type[MAX_STR];    // Type de la technique (attaque, défense, etc.)
+    int puissance;         // Puissance de la technique
+    int portee;            // Portée de la technique
+    int tours;             // Nombre de tours de l'effet de la technique
 } TechniqueSpeciale;
 
-
+// Structure pour représenter un personnage
 typedef struct {
-    char nom[MAX_NOM];
-    Element element;
-    int pv_max;
-    int pv;
-    int attaque;
-    int defense;
-    int agilite;
-    int vitesse;
-    int est_KO;
-    EffetType effets[NB_EFFETS]; 
-    int duree_effet[NB_EFFETS]; // durée de l'effet en cours
-    TechniqueSpeciale techniques[3]; //fixe à 3 techniques
+    char nom[MAX_STR];     // Nom du personnage
+    char element[MAX_STR]; // Élément (Feu, Eau, Terre, Air)
+    int pv_max;            // Points de vie maximum
+    int attaque;           // Attaque
+    int defense;           // Défense
+    int agilite;           // Agilité
+    int vitesse;           // Vitesse
+    Technique techniques[MAX_TECHS]; // Techniques spéciales
 } Combattant;
