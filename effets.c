@@ -42,11 +42,11 @@ void appliquerDegats(Combattant *c){
     for (int i = 0; i < NB_EFFETS; i++) { // On parcourt chaque effet actif du combattant
         switch ( c->effets[i]){ // On applique l'effet de la première case (peut être amélioré pour gérer plusieurs effets)
             case POISON:
-                c->pv_max -= 10; // Le poison inflige 10 PV de dégâts par tour
+                c->pv -= 10; // Le poison inflige 10 PV de dégâts par tour
                 printf("%s subit 10 points de dégâts à cause du poison !\n", c->nom);
                 break;
             case BRULURE:
-                c->pv_max -= 15; // La brûlure inflige 15 PV de dégâts par tour
+                c->pv -= 15; // La brûlure inflige 15 PV de dégâts par tour
                 printf("%s est brûlé et perd 15 points de vie !\n", c->nom);
                 break;
             case GEL:
@@ -60,8 +60,8 @@ void appliquerDegats(Combattant *c){
             case AUCUN : // Aucun effet à appliquer, donc rien à faire
                 break;
             }
-        if (c->pv_max <= 0) {
-            c->pv_max = 0;
+        if (c->pv <= 0) {
+            c->pv = 0;
             c->est_KO = 1;
             printf("%s est K.O. !\n", c->nom);
         }
@@ -76,7 +76,7 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         return; // Le combattant est KO, on ne fait rien
     }
     // On applique les effets de la technique spéciale
-    if (tech->valeur != AUCUN) { // Si la technique a un effet
+    if (tech!=NULL && tech->valeur != AUCUN) { // Si la technique a un effet
         appliquerEffetElementaire(c, *tech); // Appliquer l'effet de la technique
     }
     // reduire la durée de tous les effets actifs et l'appliquer si necessaire
@@ -91,7 +91,7 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
     }
 }
 
-
+/*// Retourne un multiplicateur de dégâts selon l’effet
 float multiplicateur(EffetType e) {
     switch (e) {
         case BRULURE:
@@ -107,5 +107,24 @@ float multiplicateur(EffetType e) {
         default:
             return 1.0; // pas de changement
     }
-}
+} */
 
+// Retourne un multiplicateur de dégâts selon l'élément
+float multiplicateur(Element attaquant, Element defenseur) {
+    if (attaquant == FEU && defenseur == TERRE){ 
+        return 1.5;
+    }
+    if (attaquant == EAU && defenseur == FEU){ 
+        return 1.5;
+    }
+    if (attaquant == TERRE && defenseur == AIR){ 
+        return 1.5;
+    }
+    if (attaquant == AIR && defenseur == TERRE){ 
+        return 1.5 ;
+    }
+    if (attaquant == defenseur){ 
+        return 1;
+    }
+    return 1; // Par défaut
+}
