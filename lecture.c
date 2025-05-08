@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "personnages.h"  // Inclusion du fichier .h contenant les définitions des structures
+#include "type.h"  // Inclusion du fichier .h contenant les définitions des structures
 
 // Supprimer le saut de ligne à la fin d'une chaîne
 void supprimer_saut_ligne(char *str) {
