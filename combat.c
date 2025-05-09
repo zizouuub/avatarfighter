@@ -25,7 +25,7 @@ int equipe_est_KO(Combattant *equipe, int taille) {
 
 // Calcule les dégâts en fonction de l'attaque, la défense, et l'element
 void attaque_normale(Combattant *attaquant, Combattant *cible) {
-    int degats = (attaquant->attaque) - (cible->defense);
+    float degats = (attaquant->attaque) - (cible->defense);
     if (degats < 0) {
         degats = 0; // minimum 0 dégâts
     }
