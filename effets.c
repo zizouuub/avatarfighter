@@ -26,7 +26,7 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
             break;
         //effet imediat 
         case SOIN:
-            cible->pv_max += effet.effet;
+            cible->pv += effet.effet;
             printf("%s récupère %d PV !\n", cible->nom, effet.effet);
             break;
         default:
