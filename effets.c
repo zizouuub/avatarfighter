@@ -13,7 +13,7 @@ void initialiser_combattant(Combattant *c) {
 //fct pour appliquer un effet elementaire direct à partir d une technique
 void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
     // Appliquer l'effet élémentaire au combattant donc la cible
-    int duree = 1; // Durée de l'effet (1 tour par défaut)
+    int duree = effet.tours; // Durée de l'effet (1 tour par défaut)
     printf("%s subit l'effet de type %s pendant %d tours !\n", cible->nom, effet.type, duree);
     switch (effet.effet) {
         case BRULURE:
@@ -46,7 +46,7 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
 
 
 //fct pour appliquer les degats à chaque tour 
-void appliquerDegats(Combattant *c, TechniqueSpeciale *tech) {
+void appliquerDegats(Combattant *c) {
     for (int i = 0; i < NB_EFFETS; i++) { // On parcourt chaque effet actif du combattant
         switch ( c->effets[i]){ // On applique l'effet de la première case (peut être amélioré pour gérer plusieurs effets)
             case POISON:
@@ -56,19 +56,6 @@ void appliquerDegats(Combattant *c, TechniqueSpeciale *tech) {
             case BRULURE:
                 c->pv -= 15; // La brûlure inflige 15 PV de dégâts par tour
                 printf("%s est brûlé et perd 15 points de vie !\n", c->nom);
-                break;
-            case ATTAQUE:
-                if (tech != NULL) {
-                    int degats = tech->puissance;
-                    // Bonus si la puissance est élevée
-                    if (tech->puissance > 50){
-                        degats += 10;
-                    }else if (tech->puissance > 100){
-                        degats += 20;
-                    }
-                    c->pv -= degats;
-                    printf("%s subit %d points de dégâts de l'attaque spéciale '%s' !\n", c->nom, degats, tech->nom);
-                }
                 break;
             case GEL:
                 // Le combattant est gelé et ne pourra pas agir pendant un tour
@@ -157,4 +144,22 @@ int est_incapacite(Combattant *c) {
         }
     }
     return 0;
+}
+
+// Fonction pour calculer les dégâts d'une attaque
+int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech) {
+    int degats = tech->puissance + attaquant->attaque;
+    if (tech->puissance > 100) {
+        degats += 20;
+    } else if (tech->puissance > 50) {
+        degats += 10;
+    }
+    return degats;
+}
+
+// Fonction qui utilise l'agilité pour déterminer si l'esquive réussit
+int tentativeEsquive(Combattant *defenseur) {
+    int chance = defenseur->agilite * 5;
+    int tirage = rand() % 100;
+    return tirage < chance;
 }
