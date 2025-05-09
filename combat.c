@@ -48,13 +48,19 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
 
 // Un joueur effectue une action pendant son tour
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires) {
-    TechniqueSpeciale *tech;
+    TechniqueSpeciale *tech = &joueur->techniques[0]; // par défaut la première techniques;
     if (joueur->est_KO){
         printf("⚠️ %s est KO et ne peut pas agir !\n", joueur->nom);
         return; // ne fait rien s'il est KO
     } 
+    // verifier joueur etourdi ou gelé
+    if (est_incapacite(joueur)) {
+        printf("%s est incapable d'agir ce tour (gelé ou étourdi) !\n", joueur->nom);
+        mettreAJourEffets(joueur, NULL); // NULL ou une technique fictive juste pour décrémenter
+        return;
+    }    
     // applique effets subis
-    appliquerDegats(joueur); //degats des effets 
+    appliquerDegats(joueur, tech); //degats des effets 
     mettreAJourEffets(joueur, tech); // On peut choisir la technique à utiliser
     // Trouve la première cible ennemie encore vivante
     Combattant *cible = NULL;
@@ -104,4 +110,3 @@ void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int
         printf("🏆 L'équipe 1 a gagné !\n");
     }
 }
-
