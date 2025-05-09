@@ -14,8 +14,8 @@ void initialiser_combattant(Combattant *c) {
 void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
     // Appliquer l'effet élémentaire au combattant donc la cible
     int duree = 1; // Durée de l'effet (1 tour par défaut)
-    printf("%s subit l'effet de type %s pendant %d tours !\n", cible->nom, effet.valeur, duree);
-    switch (effet.valeur) {
+    printf("%s subit l'effet de type %s pendant %d tours !\n", cible->nom, effet.type, duree);
+    switch (effet.effet) {
         case BRULURE:
             break;
         case GEL: 
@@ -26,19 +26,27 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
             break;
         //effet imediat 
         case SOIN:
-            cible->pv_max += effet.valeur;
-            printf("%s récupère %d PV !\n", cible->nom, effet.valeur);
+            cible->pv_max += effet.effet;
+            printf("%s récupère %d PV !\n", cible->nom, effet.effet);
             break;
         default:
             printf("Effet inconnu !\n");
             break;
+    }
+        // Ajout dans appliquerEffetElementaire :
+    for (int i = 0; i < NB_EFFETS; i++) {
+        if (cible->effets[i] == AUCUN) {
+            cible->effets[i] = effet.effet;
+            cible->duree_effet[i] = effet.tours;
+            break;
+        }
     }
 }
 
 
 
 //fct pour appliquer les degats à chaque tour 
-void appliquerDegats(Combattant *c){
+void appliquerDegats(Combattant *c, TechniqueSpeciale *tech) {
     for (int i = 0; i < NB_EFFETS; i++) { // On parcourt chaque effet actif du combattant
         switch ( c->effets[i]){ // On applique l'effet de la première case (peut être amélioré pour gérer plusieurs effets)
             case POISON:
@@ -48,6 +56,19 @@ void appliquerDegats(Combattant *c){
             case BRULURE:
                 c->pv -= 15; // La brûlure inflige 15 PV de dégâts par tour
                 printf("%s est brûlé et perd 15 points de vie !\n", c->nom);
+                break;
+            case ATTAQUE:
+                if (tech != NULL) {
+                    int degats = tech->puissance;
+                    // Bonus si la puissance est élevée
+                    if (tech->puissance > 50){
+                        degats += 10;
+                    }else if (tech->puissance > 100){
+                        degats += 20;
+                    }
+                    c->pv -= degats;
+                    printf("%s subit %d points de dégâts de l'attaque spéciale '%s' !\n", c->nom, degats, tech->nom);
+                }
                 break;
             case GEL:
                 // Le combattant est gelé et ne pourra pas agir pendant un tour
@@ -76,7 +97,7 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         return; // Le combattant est KO, on ne fait rien
     }
     // On applique les effets de la technique spéciale
-    if (tech!=NULL && tech->valeur != AUCUN) { // Si la technique a un effet
+    if (tech!=NULL && tech->effet != AUCUN) { // Si la technique a un effet
         appliquerEffetElementaire(c, *tech); // Appliquer l'effet de la technique
     }
     // reduire la durée de tous les effets actifs et l'appliquer si necessaire
@@ -127,4 +148,13 @@ float multiplicateur(Element attaquant, Element defenseur) {
         return 1;
     }
     return 1; // Par défaut
+}
+
+int est_incapacite(Combattant *c) {
+    for (int i = 0; i < NB_EFFETS; i++) {
+        if ((c->effets[i] == GEL || c->effets[i] == STUN) && c->duree_effet[i] > 0) {
+            return 1; // Incapacité active
+        }
+    }
+    return 0;
 }
