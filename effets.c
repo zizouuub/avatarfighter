@@ -158,3 +158,4 @@ int tentativeEsquive(Combattant *defenseur) {
     int tirage = rand() % 100;
     return tirage < chance;
 }
+
