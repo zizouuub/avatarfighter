@@ -37,4 +37,6 @@ typedef struct {
     EffetType effets[NB_EFFETS];             // Liste des effets actifs
     int duree_effet[NB_EFFETS];              // Durées des effets
     TechniqueSpeciale techniques[MAX_TECHS]; // Techniques spéciales
+    int temps_recharge[MAX_TECHS]; // nombre de tours restants avant de réutiliser la technique
+    int prochain_tour; // nombre de tours à attendre avant de rejouer (lié à vitesse)
 } Combattant;
