@@ -1,5 +1,43 @@
 #include "combat.h"
 
+int choisir_combattant(Combattant *equipe, int taille) {
+    int choix = -1;
+    do {
+        printf("Choisissez un combattant actif :\n");
+        for (int i = 0; i < taille; i++) {
+            if (!equipe[i].est_KO && equipe[i].prochain_tour <= 0) {
+                printf("%d. %s (PV: %d)\n", i, equipe[i].nom, equipe[i].pv);
+            }
+        }
+        scanf("%d", &choix);
+    } while (choix < 0 || choix >= taille || equipe[choix].est_KO || equipe[choix].prochain_tour > 0);
+    return choix;
+}
+
+int choisir_cible(Combattant *equipe, int taille) {
+    int choix = -1;
+    do {
+        printf("Choisissez une cible :\n");
+        for (int i = 0; i < taille; i++) {
+            if (!equipe[i].est_KO) {
+                printf("%d. %s (PV: %d)\n", i, equipe[i].nom, equipe[i].pv);
+            }
+        }
+        scanf("%d", &choix);
+    } while (choix < 0 || choix >= taille || equipe[choix].est_KO);
+    return choix;
+}
+
+void maj_tours_combattants(Combattant *equipe, int taille) {
+    for (int i = 0; i < taille; i++) {
+        if (equipe[i].prochain_tour > 0) equipe[i].prochain_tour--;
+        for (int j = 0; j < MAX_TECHS; j++) {
+            if (equipe[i].temps_recharge[j] > 0)
+                equipe[i].temps_recharge[j]--;
+        }
+    }
+}
+
 // Fonction pour initialiser le combat
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
     // Initialisation des compteurs de tour et des effets
