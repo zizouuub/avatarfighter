@@ -7,19 +7,22 @@ Agilite: 5
 Vitesse: 2
 Technique: Jet de flamme
 Type: ATTAQUE
-Puissance: 10
+Puissance: 15
 Portée: 0
 Tours: 0
+Description: Zuko lance un jet de flammes en ligne droite, infligeant des dégâts modérés à l'ennemi. C'est une attaque rapide et directe.
 Technique: Mur de feu
 Type: DEFENSE
-Puissance: 10
-Portée: 1
-Tours: 3
+Puissance: 12
+Portée: 0
+Tours: 2
+Description: Zuko crée un mur de flammes autour de lui pour se protéger. Ce mur bloque les attaques ennemies pendant 2 tours, réduisant les dégâts.
 Technique: Explosion ardente
 Type: BRULURE
-Puissance: 12
+Puissance: 22
 Portée: 2
 Tours: 5
+Description: Zuko déclenche une explosion de flammes intenses qui inflige des brûlures à ses ennemis. L'attaque a un rayon de portée et peut affecter plusieurs cibles.
 
 Nom: Azula
 Element: FEU
@@ -30,19 +33,22 @@ Agilite: 6
 Vitesse: 2
 Technique: Double flamme
 Type: ATTAQUE
-Puissance: 8
+Puissance: 15
 Portée: 0
 Tours: 0
+Description: Azula tire deux jets de flammes simultanés, attaquant deux ennemis ou infligeant des dégâts plus importants à un seul.
 Technique: Danse infernale
 Type: AGILITE
-Puissance: 10
-Portée: 1
+Puissance: 12
+Portée: 0
 Tours: 3
+Description: Azula exécute une danse enflammée qui augmente sa vitesse et sa capacité à éviter les attaques pendant trois tours.
 Technique: Brasier
 Type: BRULURE
-Puissance: 20
+Puissance: 25
 Portée: 2
 Tours: 4
+Description: Azula génère un brasier intense qui brule tout sur son passage, infligeant des dégâts de feu importants sur une large zone.
 
 Nom: Katara
 Element: EAU
@@ -53,19 +59,22 @@ Agilite: 6
 Vitesse: 1
 Technique: Lame d’eau
 Type: ATTAQUE
-Puissance: 10
+Puissance: 15
 Portée: 0
 Tours: 0
+Description: Katara crée une lame tranchante d'eau qu'elle lance pour infliger des dégâts à un ennemi proche.
 Technique: Vague curative
 Type: SOIN
-Puissance: 20
+Puissance: 18
 Portée: 0
 Tours: 2
+Description: Katara forme une vague d'eau magique qui soigne ses alliés, régénérant leur santé sur une période de deux tours.
 Technique: Gel profond
 Type: GEL
-Puissance: 0
+Puissance: 12
 Portée: 1
 Tours: 4
+Description: Katara utilise l'eau pour geler une zone, ralentissant l'ennemi et réduisant sa capacité à attaquer ou se déplacer.
 
 Nom: Sokka
 Element: EAU
@@ -76,19 +85,22 @@ Agilite: 5
 Vitesse: 1
 Technique: Aiguilles de glace
 Type: ATTAQUE
-Puissance: 12
+Puissance: 14
 Portée: 0
 Tours: 0
+Description: Sokka lance des aiguilles de glace acérées, infligeant des dégâts à l'ennemi tout en ralentissant sa vitesse de mouvement.
 Technique: Barrière polaire
 Type: DEFENSE
-Puissance: 10
-Portée: 2
+Puissance: 12
+Portée: 0
 Tours: 3
+Description: Sokka crée une barrière de glace autour de lui ou de ses alliés, réduisant les dégâts reçus pendant trois tours.
 Technique: Blizzard
 Type: GEL
-Puissance: -5
+Puissance: 22
 Portée: 2
 Tours: 4
+Description: Sokka invoque une tempête de neige qui ralentit tous les ennemis dans une large zone, tout en leur infligeant des dégâts de froid.
 
 Nom: Toph
 Element: TERRE
@@ -99,19 +111,22 @@ Agilite: 3
 Vitesse: 2
 Technique: Poing rocheux
 Type: ATTAQUE
-Puissance: 15
+Puissance: 20
 Portée: 0
 Tours: 0
+Description: Toph frappe le sol avec une force brutale, créant des pierres qui frappent ses ennemis avec une grande puissance.
 Technique: Bouclier de pierre
 Type: DEFENSE
 Puissance: 15
-Portée: 1
+Portée: 0
 Tours: 4
+Description: Toph érige un bouclier de pierres solides autour de ses alliés, les protégeant des attaques et réduisant les dégâts.
 Technique: Séisme
 Type: STUN
-Puissance: 0
+Puissance: 18
 Portée: 1
 Tours: 5
+Description: Toph frappe violemment le sol, provoquant un tremblement de terre qui sonne ses ennemis, les empêchant d'agir pendant un tour.
 
 Nom: Kyashi
 Element: TERRE
@@ -122,19 +137,22 @@ Agilite: 4
 Vitesse: 2
 Technique: Coup durci
 Type: ATTAQUE
-Puissance: 12
+Puissance: 16
 Portée: 0
 Tours: 0
+Description: Kyashi frappe son ennemi avec un coup renforcé de terre, infligeant des dégâts modérés tout en augmentant ses défenses pour un tour.
 Technique: Armure vivante
 Type: CONTRE
-Puissance: 0
+Puissance: 12
 Portée: 1
 Tours: 3
+Description: Kyashi transforme son corps en une armure de pierre qui lui permet de contrer les attaques physiques de l'ennemi pendant trois tours.
 Technique: Onde tellurique
 Type: STUN
-Puissance: -5
+Puissance: 25
 Portée: 2
 Tours: 4
+Description: Kyashi génère une onde de choc souterraine qui envoie ses ennemis au sol, les rendant incapables de bouger pendant un tour.
 
 Nom: Aang
 Element: AIR
@@ -145,19 +163,22 @@ Agilite: 8
 Vitesse: 1
 Technique: Coup de vent
 Type: ATTAQUE
-Puissance: 8
+Puissance: 12
 Portée: 0
 Tours: 0
+Description: Aang lance un coup de vent puissant, attaquant un ennemi tout en lui infligeant des dégâts modérés.
 Technique: Esquive absolue
 Type: AGILITE
 Puissance: 15
 Portée: 1
 Tours: 3
+Description: Aang utilise sa maîtrise de l'air pour esquiver instantanément toute attaque dans un rayon proche, augmentant sa mobilité pendant trois tours.
 Technique: Tornade
 Type: POISON
-Puissance: -10
+Puissance: 20
 Portée: 2
 Tours: 4
+Description: Aang génère une tornade qui envoie des éclats de poison, affectant les ennemis dans une zone et les rendant incapables d'agir pendant un tour.
 
 Nom: Sahn
 Element: AIR
@@ -168,16 +189,19 @@ Agilite: 7
 Vitesse: 2
 Technique: Frappe tournoyante
 Type: ATTAQUE
-Puissance: 10
-Portée: 1
+Puissance: 15
+Portée: 0
 Tours: 2
+Description: Sahn exécute une frappe tournoyante avec une grande rapidité, attaquant un ennemi à distance tout en augmentant ses chances d'esquive pendant deux tours.
 Technique: Silence du ciel
 Type: DEFENSE
-Puissance: 0
+Puissance: 12
 Portée: 1
 Tours: 3
+Description: Sahn invoque une brise silencieuse autour de lui qui neutralise les attaques sonores et permet d'échapper à des sorts de contrôle pendant trois tours.
 Technique: Typhon
 Type: POISON
 Puissance: 25
 Portée: 0
 Tours: 4
+Description: Sahn crée un typhon dévastateur qui projette des éclats de poison, infligeant de lourds dégâts à l'ennemi et réduisant ses capacités à contre-attaquer pendant un tour.
