@@ -182,26 +182,32 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
     printf("\n💥 🎮 Début du combat !\n");
     int tour = 1; // Compteur de tours
+    int equipe_actuelle = rand()%2; //0 = equipe1 commence, 1 = equipe2 commence
+    vitesse ex si 2 tours apres avoir utilisé le perso on pourra le reutiliser que dans 2 tours
     // Tant qu'une équipe n'est pas KO
     while (equipe_est_KO(equipe1, taille1) == 0 && equipe_est_KO(equipe2, taille2) == 0) {
         printf("\n🔁 Tour %d\n", tour);
         // Tous les combattants de l’équipe 1 jouent
-        for (int i = 0; i < taille1; i++) { 
-            if (!equipe1[i].est_KO) { // Si le combattant n'est pas KO
-                effectuer_tour(&equipe1[i], equipe2, taille2);
+        if (equipe_actuelle == 0) {
+            for (int i = 0; i < taille1; i++) { 
+                if (!equipe1[i].est_KO) { // Si le combattant n'est pas KO
+                    effectuer_tour(&equipe1[i], equipe2, taille2);
+                    }
                 }
-            }
+            equipe_actuelle = 1; // prochain tour : équipe 2
+        }
         // On vérifie si l'équipe 2 est éliminée avant de continuer
         if (equipe_est_KO(equipe2, taille2)){
             break; // Sort de la boucle si l'équipe 2 est KO
-        }
-        // Tous les combattants de l’équipe 2 jouent
-        for (int i = 0; i < taille2; i++) {
-            if (!equipe2[i].est_KO) {
-                effectuer_tour(&equipe2[i], equipe1, taille1);
+        }else {
+            for (int i = 0; i < taille2; i++) {
+                if (!equipe2[i].est_KO) {  // Tous les combattants de l’équipe 2 jouent
+                    effectuer_tour(&equipe2[i], equipe1, taille1);
                 }
             }
-            tour++;
+            equipe_actuelle = 0; // prochain tour : équipe 1
+        }
+        tour++;
         }
     // Fin du combat : affiche le gagnant
     printf("\n🎯 Fin du combat !\n");
