@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "effets.h"
+#include "lecture.h"
 
-#define MAX_PERSOS 10
 
 // Supprimer le saut de ligne à la fin d'une chaîne
 void supprimer_saut_ligne(char *str) {
