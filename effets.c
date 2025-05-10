@@ -3,7 +3,17 @@
 const char* nomEffets[] = {
     "Aucun", "Attaque", "Défense", "Agilité", "Stun", "Gel", "Soin", "Brûlure", "Contre", "Poison"
 };
-
+void initialiser_combattant(Combattant *c) {
+    c->est_KO = 0;
+    c->prochain_tour = 0;
+    for (int i = 0; i < MAX_TECHS; i++) {
+        c->temps_recharge[i] = 0;
+    }
+    for (int i = 0; i < NB_EFFETS; i++) {
+        c->effets[i] = AUCUN;
+        c->duree_effet[i] = 0;
+    }
+}
 
 void initialiser_combattant(Combattant *c) {
     c->est_KO = 0;
