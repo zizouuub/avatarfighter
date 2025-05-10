@@ -87,16 +87,16 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
             printf("🧪 %s se soigne avec %s et récupère %d PV !\n", attaquant->nom, tech->nom, tech->puissance);
             break;
         case STUN:
-            appliquerEffetElementaire(cible, tech);
+            appliquerEffetElementaire(cible, *tech);
             break;
         case GEL:
-            appliquerEffetElementaire(cible, tech);
+            appliquerEffetElementaire(cible, *tech);
             break;
         case BRULURE:
-            appliquerEffetElementaire(cible, tech);
+            appliquerEffetElementaire(cible, *tech);
             break;
         case POISON:
-            appliquerEffetElementaire(cible, tech);
+            appliquerEffetElementaire(cible, *tech);
             printf("🎯 %s applique l'effet %s à %s !\n", attaquant->nom, tech->nom, cible->nom);
             break;
         default:
@@ -135,7 +135,7 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
 }
     // Si une cible existe, on l’attaque 
     if (cible != NULL) {
-        attaque_normale(joueur, cible);
+        utiliserTechnique(joueur, cible, &joueur->techniques[0]); // Utilise la première technique
     }
 }
 
@@ -173,6 +173,5 @@ void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int
         printf("🏆 L'équipe 1 a gagné !\n");
     }
 }
-
 
 
