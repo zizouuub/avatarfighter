@@ -187,8 +187,7 @@ void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, i
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
     printf("\n💥 🎮 Début du combat !\n");
     int tour = 1; // Compteur de tours
-    int equipe_actuelle = rand()%2; //0 = equipe1 commence, 1 = equipe2 commence
-    vitesse ex si 2 tours apres avoir utilisé le perso on pourra le reutiliser que dans 2 tours
+    int equipe_actuelle = rand()%2; //0 = equipe1 commence, 1 = equipe2 
     // Tant qu'une équipe n'est pas KO
     while (equipe_est_KO(equipe1, taille1) == 0 && equipe_est_KO(equipe2, taille2) == 0) {
         printf("\n🔁 Tour %d\n", tour);
