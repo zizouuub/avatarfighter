@@ -20,6 +20,7 @@ typedef struct {
     int portee;              // Durée de l'effet
     int tours;               // Nombre de tours avant de reutiliser l'attaque
     EffetType effet;         // Type d'effet appliqué (ex : POISON, BRULURE...)
+    char description[MAX_STR];
 } TechniqueSpeciale;
 
 // Structure pour représenter un combattant
