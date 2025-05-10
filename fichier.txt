@@ -4,7 +4,7 @@ PV_max: 80
 Attaque: 30
 Defense: 10
 Agilite: 5
-Vitesse: 20
+Vitesse: 2
 Technique: Jet de flamme
 Type: ATTAQUE
 Puissance: 10
@@ -27,7 +27,7 @@ PV_max: 70
 Attaque: 22
 Defense: 8
 Agilite: 6
-Vitesse: 26
+Vitesse: 2
 Technique: Double flamme
 Type: ATTAQUE
 Puissance: 8
@@ -50,7 +50,7 @@ PV_max: 90
 Attaque: 15
 Defense: 12
 Agilite: 6
-Vitesse: 14
+Vitesse: 1
 Technique: Lame d’eau
 Type: ATTAQUE
 Puissance: 10
@@ -73,7 +73,7 @@ PV_max: 100
 Attaque: 18
 Defense: 20
 Agilite: 5
-Vitesse: 12
+Vitesse: 1
 Technique: Aiguilles de glace
 Type: ATTAQUE
 Puissance: 12
@@ -96,7 +96,7 @@ PV_max: 110
 Attaque: 18
 Defense: 25
 Agilite: 3
-Vitesse: 10
+Vitesse: 2
 Technique: Poing rocheux
 Type: ATTAQUE
 Puissance: 15
@@ -119,7 +119,7 @@ PV_max: 100
 Attaque: 20
 Defense: 20
 Agilite: 4
-Vitesse: 13
+Vitesse: 2
 Technique: Coup durci
 Type: ATTAQUE
 Puissance: 12
@@ -142,7 +142,7 @@ PV_max: 70
 Attaque: 20
 Defense: 8
 Agilite: 8
-Vitesse: 25
+Vitesse: 1
 Technique: Coup de vent
 Type: ATTAQUE
 Puissance: 8
@@ -165,7 +165,7 @@ PV_max: 65
 Attaque: 26
 Defense: 6
 Agilite: 7
-Vitesse: 28
+Vitesse: 2
 Technique: Frappe tournoyante
 Type: ATTAQUE
 Puissance: 10
