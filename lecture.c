@@ -5,13 +5,13 @@
 void supprimer_saut_ligne(char *str) {
     size_t len = strlen(str);
     if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';
+        str[len - 1] = '\0'; Remplace '\n' par '\0'
     }
 }
 
 // Conversion texte → EffetType
 EffetType convertirEffetType(const char *effetStr) {
-    if (strcmp(effetStr, "AUCUN") == 0) return AUCUN;
+    if (strcmp(effetStr, "AUCUN") == 0) return AUCUN; 
     if (strcmp(effetStr, "ATTAQUE") == 0) return ATTAQUE;
     if (strcmp(effetStr, "DEFENSE") == 0) return DEFENSE;
     if (strcmp(effetStr, "AGILITE") == 0) return AGILITE;
@@ -21,7 +21,7 @@ EffetType convertirEffetType(const char *effetStr) {
     if (strcmp(effetStr, "BRULURE") == 0) return BRULURE;
     if (strcmp(effetStr, "CONTRE") == 0) return CONTRE;
     if (strcmp(effetStr, "POISON") == 0) return POISON;
-    return AUCUN;
+    return AUCUN; // Valeur par défaut si non reconnu
 }
 
 
@@ -32,28 +32,26 @@ int main() {
         perror("Erreur lors de l'ouverture du fichier");
         return 1;
     }
-    Combattant persos[MAX_PERSOS];
+    Combattant persos[MAX_PERSOS];  // Tableau de combattants
     int nb_persos = 0;
     char ligne[100];
-
+    // Lecture du fichier
     while (fgets(ligne, sizeof(ligne), fichier) && nb_persos < MAX_PERSOS) {
         Combattant p;
-        initialiser_combattant(&p); // Important pour zéro-initialiser
-
-        // Nom
+        initialiser_combattant(&p); // Important pour zéro-initialiser, initialise les valeurs à zéro
+        // lecture du Nom
         sscanf(ligne, "Nom: %[^\n]", p.nom);
         supprimer_saut_ligne(p.nom);
-
+        
         // Élément
         fgets(ligne, sizeof(ligne), fichier);
         sscanf(ligne, "Element: %[^\n]", ligne);
         supprimer_saut_ligne(ligne);
-
         if (strcmp(ligne, "FEU") == 0) p.element = FEU;
         else if (strcmp(ligne, "EAU") == 0) p.element = EAU;
         else if (strcmp(ligne, "TERRE") == 0) p.element = TERRE;
         else if (strcmp(ligne, "AIR") == 0) p.element = AIR;
-
+        
         // Stats
         fscanf(fichier, "PV_max: %d\n", &p.pv_max);
         p.pv = p.pv_max; // pv actuels = max au début
@@ -87,13 +85,13 @@ int main() {
             supprimer_saut_ligne(effetStr);
             p.techniques[i].effet = convertirEffetType(effetStr);
         }
-
+        // Ajout du combattant dans le tableau
         persos[nb_persos++] = p;
     }
 
     fclose(fichier);
 
-    // ✅ Vérification de chargement
+    // affichage de verification de chargement
     for (int i = 0; i < nb_persos; i++) {
         printf("\n>> %s (%d PV, Élément: %d)\n", persos[i].nom, persos[i].pv_max, persos[i].element);
         for (int j = 0; j < MAX_TECHS; j++) {
