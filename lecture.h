@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "effets.h"
-#include "type.h"
+
 #define MAX_PERSOS 10
 
 
