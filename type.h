@@ -1,6 +1,6 @@
 #define MAX_STR 50
 #define MAX_TECHS 3      // Nombre de techniques par personnage
-#define NB_EFFETS 13     // Nombre d'effets possibles
+#define NB_EFFETS 10    // Nombre d'effets possibles
 
 // Enumération pour les éléments
 typedef enum {
