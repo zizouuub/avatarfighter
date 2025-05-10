@@ -1,4 +1,9 @@
-#include "type.h" 
+#ifndef EFFETS_H
+#define EFFETS_H
+
+#include "type.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 // Initialise un combattant avec des valeurs par défaut
 void initialiser_combattant(Combattant *c);
@@ -12,14 +17,17 @@ void appliquerDegats(Combattant *c);
 // Met à jour la durée des effets
 void mettreAJourEffets(Combattant *combattant, TechniqueSpeciale *tech);
 
-// Retourne un multiplicateur de dégâts selon l’effet 
+// Retourne un multiplicateur de dégâts selon les éléments
 float multiplicateur(Element attaquant, Element defenseur);
 
-// gel un combattant
+// Vérifie si le combattant est gelé ou étourdi
 int est_incapacite(Combattant *c);
 
-// Fonction pour calculer les dégâts d'une attaque
+// Calcule les dégâts d'une attaque
 int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech);
 
-// Fonction qui utilise l'agilité pour déterminer si l'esquive réussit
+// Détermine si une esquive réussit
 int tentativeEsquive(Combattant *defenseur);
+
+#endif
+
