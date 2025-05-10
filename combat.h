@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "effets.h"
 #include "type.h" 
+#include "time.h"
+
 
 // Fonction pour initialiser le combat
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
@@ -19,6 +21,8 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
 
 // Fonction pour choisir une action (attaquer ou utiliser une technique)
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires);
+
+void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
 
 // Fonction pour gérer le combat entre deux équipes
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
