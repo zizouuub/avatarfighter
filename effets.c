@@ -4,6 +4,7 @@ const char* nomEffets[] = {
     "Aucun", "Attaque", "Défense", "Agilité", "Stun", "Gel", "Soin", "Brûlure", "Contre", "Poison"
 };
 
+
 void initialiser_combattant(Combattant *c) {
     c->est_KO = 0;
     for (int i = 0; i < NB_EFFETS; i++) {
@@ -11,6 +12,7 @@ void initialiser_combattant(Combattant *c) {
         c->duree_effet[i] = 0;
     }
 }
+
 
 //fct pour appliquer un effet elementaire direct à partir d une technique
 void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
@@ -21,7 +23,6 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
     } else {
         printf("%s subit un effet inconnu pendant %d tours !\n", cible->nom, duree);
     }
-
     switch (effet.effet) {
         // effet imediat
         case SOIN:
@@ -41,6 +42,7 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
         }
     }
 }
+
 
 //fct pour appliquer les degats à chaque tour 
 void appliquerDegats(Combattant *c) {
@@ -72,7 +74,6 @@ void appliquerDegats(Combattant *c) {
                 // Aucun effet de dégâts à appliquer
                 break;
         }
-
         if (c->pv <= 0) {
             c->pv = 0;
             c->est_KO = 1;
@@ -81,6 +82,7 @@ void appliquerDegats(Combattant *c) {
         }
     }
 }
+
 
 //fct pour mettre à jour les effets de tous les combattants
 void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
@@ -102,10 +104,10 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
                 c->effets[i] = AUCUN;  // on le supprime
                 c->duree_effet[i] = 0; // on s'assure que la durée est à 0
             }
-            }
         }
     }
 }
+
 
 // Retourne un multiplicateur de dégâts selon l'élément
 float multiplicateur(Element attaquant, Element defenseur) {
@@ -127,6 +129,7 @@ float multiplicateur(Element attaquant, Element defenseur) {
     return 1; // Par défaut
 }
 
+
 int est_incapacite(Combattant *c) {
     for (int i = 0; i < NB_EFFETS; i++) {
         if ((c->effets[i] == GEL || c->effets[i] == STUN) && c->duree_effet[i] > 0) {
@@ -135,6 +138,7 @@ int est_incapacite(Combattant *c) {
     }
     return 0;
 }
+
 
 // Fonction pour calculer les dégâts d'une attaque
 int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech) {
@@ -147,10 +151,10 @@ int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech) {
     return degats;
 }
 
+
 // Fonction qui utilise l'agilité pour déterminer si l'esquive réussit
 int tentativeEsquive(Combattant *defenseur) {
     int chance = defenseur->agilite * 5;
     int tirage = rand() % 100;
     return tirage < chance;
 }
-
