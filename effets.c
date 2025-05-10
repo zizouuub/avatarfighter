@@ -1,5 +1,5 @@
 #include "effets.h"
-#include <stdio.h>
+
 
 void initialiser_combattant(Combattant *c) {
     c->est_KO = 0;
@@ -14,7 +14,7 @@ void initialiser_combattant(Combattant *c) {
 void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
     // Appliquer l'effet élémentaire au combattant donc la cible
     int duree = effet.tours; // Durée de l'effet (1 tour par défaut)
-    printf("%s subit l'effet de type %s pendant %d tours !\n", cible->nom, effet.type, duree);
+    printf("%s subit l'effet de type %s pendant %d tours !\n", cible->nom, effet.effet, duree);
     switch (effet.effet) {
         case BRULURE:
             break;
@@ -26,8 +26,8 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
             break;
         //effet imediat 
         case SOIN:
-            cible->pv += effet.effet;
-            printf("%s récupère %d PV !\n", cible->nom, effet.effet);
+            cible->pv += effet.puissance;
+            printf("%s récupère %d PV !\n", cible->nom, effet.puissance);
             break;
         default:
             printf("Effet inconnu !\n");
@@ -163,3 +163,4 @@ int tentativeEsquive(Combattant *defenseur) {
     int tirage = rand() % 100;
     return tirage < chance;
 }
+
