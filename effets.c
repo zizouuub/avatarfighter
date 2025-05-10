@@ -15,13 +15,6 @@ void initialiser_combattant(Combattant *c) {
     }
 }
 
-void initialiser_combattant(Combattant *c) {
-    c->est_KO = 0;
-    for (int i = 0; i < NB_EFFETS; i++) {
-        c->effets[i] = AUCUN;
-        c->duree_effet[i] = 0;
-    }
-}
 
 
 //fct pour appliquer un effet elementaire direct à partir d une technique
