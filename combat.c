@@ -56,9 +56,9 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
     switch (tech->effet) {
         case ATTAQUE:
                 degats = tech->puissance;
-                if (tech->puissance > 100) {
+                if (tech->puissance > 20) {
                     degats += 20;
-                } else if (tech->puissance > 50) {
+                } else if (tech->puissance > 10) {
                     degats += 10;
                 }
                 // Application du multiplicateur selon l'élément
