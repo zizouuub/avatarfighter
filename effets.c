@@ -91,22 +91,33 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         printf("%s est KO et ne peut pas agir !\n", c->nom);
         return; // Le combattant est KO, on ne fait rien
     }
-    // On applique les effets de la technique spéciale
-    if (tech != NULL && tech->effet != AUCUN) { // Si la technique a un effet
-        appliquerEffetElementaire(c, *tech); // Appliquer l'effet de la technique
+
+    // Appliquer les effets de la technique spéciale
+    if (tech != NULL && tech->effet != AUCUN) {
+        // Définir la durée de l'effet basée sur la portée
+        for (int i = 0; i < NB_EFFETS; i++) {
+            if (c->effets[i] == AUCUN) {  // Si la case d'effet est vide
+                c->effets[i] = tech->effet;       // Appliquer l'effet
+                c->duree_effet[i] = tech->portee; // La durée de l'effet est égale à la portée
+                break;  // Sortir de la boucle après avoir appliqué l'effet
+            }
+        }
+        appliquerEffetElementaire(c, *tech); // Appliquer l'effet spécifique à l'élément
     }
-    // reduire la durée de tous les effets actifs et l'appliquer si necessaire
-    for (int i = 0; i < NB_EFFETS; i++) {  // on parcourt chaque effet actif du combattant
-        if (c->effets[i] != AUCUN) { // si l'effet est actif alors :
-            c->duree_effet[i]--; // on diminue la durée de l'effet d'un tour
-            if (c->duree_effet[i] <= 0) { // si la durée de l'effet est fini alors :
+
+    // Réduire la durée de tous les effets actifs et appliquer si nécessaire
+    for (int i = 0; i < NB_EFFETS; i++) {
+        if (c->effets[i] != AUCUN) {  // Si l'effet est actif
+            c->duree_effet[i]--;  // On diminue la durée de l'effet d'un tour
+            if (c->duree_effet[i] <= 0) {  // Si l'effet est terminé
                 printf("L'effet %s sur %s prend fin.\n", nomEffets[c->effets[i]], c->nom);
-                c->effets[i] = AUCUN;  // on le supprime
-                c->duree_effet[i] = 0; // on s'assure que la durée est à 0
+                c->effets[i] = AUCUN;  // Supprimer l'effet
+                c->duree_effet[i] = 0;  // Remettre la durée à 0
             }
         }
     }
 }
+
 
 
 // Retourne un multiplicateur de dégâts selon l'élément
