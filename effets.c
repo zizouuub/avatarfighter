@@ -140,12 +140,6 @@ int est_incapacite(Combattant *c) {
 }
 
 
-// Fonction pour calculer les dégâts d'une attaque
-int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech) {
-    int degats = tech->puissance + attaquant->attaque;
-    return degats;
-}
-
 
 // Fonction qui utilise l'agilité pour déterminer si l'esquive réussit
 int tentativeEsquive(Combattant *defenseur) {
