@@ -177,7 +177,7 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     }
 }
 
-void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
+void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
     srand(time(NULL));  // Initialisation du générateur aléatoire
     printf("Le combat commence entre deux équipes !\n");
 }
