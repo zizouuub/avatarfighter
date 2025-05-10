@@ -28,10 +28,10 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
     float degats = (attaquant->attaque) - (cible->defense);
     if (degats < 0) {
         degats = 0; // minimum 0 dégâts
-    }
-    // Multiplie les dégâts selon le type d'element 
-    float multipli = multiplicateur(attaquant->element, cible->element);
-    degats = degats * multipli;
+    }else{
+        // Multiplie les dégâts selon le type d'element
+        degats = multiplicateur(attaquant->element, cible->element) * degats; // Applique le multiplicateur d'élément
+    } 
     // Applique les dégâts
     cible->pv -= degats;
     // Si la cible est à 0 PV ou moins, elle est KO
@@ -41,27 +41,90 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
         printf("❌ %s est KO !\n", cible->nom);
     } else {
         // Affiche le résultat du coup
-        printf("💥 %s inflige %d dégâts à %s (reste %d PV)\n", attaquant->nom, degats, cible->nom, cible->pv);
+        printf("💥 %s inflige %.2f dégâts à %s (reste %d PV)\n", attaquant->nom, degats, cible->nom, cible->pv);
     }
 }
 
 
+void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpeciale *tech) {
+    if (tech == NULL) {
+        // attaque normale
+        attaque_normale(attaquant, cible);
+        return;
+    }
+    float degats = 0; // Initialisation des dégâts
+    switch (tech->effet) {
+        case ATTAQUE:
+                degats = tech->puissance;
+                if (tech->puissance > 100) {
+                    degats += 20;
+                } else if (tech->puissance > 50) {
+                    degats += 10;
+                }
+                // Application du multiplicateur selon l'élément
+                degats *= multiplicateur(attaquant->element, cible->element);
+                cible->pv -= degats;
+                if (cible->pv < 0){ 
+                cible->pv = 0;
+                cible->est_KO = 1;
+                printf("❌ %s est KO !\n", cible->nom);
+                }
+                printf("⚡ %s utilise %s et inflige %.2f dégâts à %s !\n", attaquant->nom, tech->nom, degats, cible->nom);
+            break;
+        case DEFENSE:
+            attaquant->defense += tech->puissance;
+            printf("🛡️ %s renforce sa défense avec %s (+%d) !\n", attaquant->nom, tech->nom, tech->puissance);
+            break;
+        case AGILITE:
+            attaquant->agilite += tech->puissance;
+            printf("💨 %s augmente son agilité avec %s (+%d) !\n", attaquant->nom, tech->nom, tech->puissance);
+            break;
+        case SOIN:
+            attaquant->pv += tech->puissance;
+            if (attaquant->pv > attaquant->pv_max){
+                attaquant->pv = attaquant->pv_max;
+            }
+            printf("🧪 %s se soigne avec %s et récupère %d PV !\n", attaquant->nom, tech->nom, tech->puissance);
+            break;
+        case STUN:
+            appliquerEffetElementaire(cible, tech);
+            break;
+        case GEL:
+            appliquerEffetElementaire(cible, tech);
+            break;
+        case BRULURE:
+            appliquerEffetElementaire(cible, tech);
+            break;
+        case POISON:
+            appliquerEffetElementaire(cible, tech);
+            printf("🎯 %s applique l'effet %s à %s !\n", attaquant->nom, tech->nom, cible->nom);
+            break;
+        default:
+            printf("Effet inconnu ou non implémenté !\n");
+            break;
+        }
+    if (cible->pv <= 0) {
+        cible->pv = 0;
+        cible->est_KO = 1;
+        printf("❌ %s est KO !\n", cible->nom);
+    }
+}
+
 // Un joueur effectue une action pendant son tour
-void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires) {
-    TechniqueSpeciale *tech = &joueur->techniques[0]; // par défaut la première techniques;
+void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires) { 
     if (joueur->est_KO){
         printf("⚠️ %s est KO et ne peut pas agir !\n", joueur->nom);
         return; // ne fait rien s'il est KO
     } 
     // verifier joueur etourdi ou gelé
     if (est_incapacite(joueur)) {
-        printf("%s est incapable d'agir ce tour (gelé ou étourdi) !\n", joueur->nom);
+        printf(" ⛔ %s est incapable d'agir ce tour (gelé ou étourdi) !\n", joueur->nom);
         mettreAJourEffets(joueur, NULL); // NULL ou une technique fictive juste pour décrémenter
         return;
     }    
     // applique effets subis
-    appliquerDegats(joueur, tech); //degats des effets 
-    mettreAJourEffets(joueur, tech); // On peut choisir la technique à utiliser
+    appliquerDegats(joueur); //degats des effets 
+    mettreAJourEffets(joueur, NULL); // On peut choisir la technique à utiliser
     // Trouve la première cible ennemie encore vivante
     Combattant *cible = NULL;
     for (int i = 0; i < taille_adversaires; i++) {
@@ -110,3 +173,6 @@ void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int
         printf("🏆 L'équipe 1 a gagné !\n");
     }
 }
+
+
+
