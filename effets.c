@@ -143,11 +143,6 @@ int est_incapacite(Combattant *c) {
 // Fonction pour calculer les dégâts d'une attaque
 int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech) {
     int degats = tech->puissance + attaquant->attaque;
-    if (tech->puissance > 100) {
-        degats += 20;
-    } else if (tech->puissance > 50) {
-        degats += 10;
-    }
     return degats;
 }
 
