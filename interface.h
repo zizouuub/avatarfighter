@@ -3,7 +3,6 @@
 #define INTERFACE_H
 
 #include "type.h"
-#define MAX_PERSOS 100 
 
 //pour les couleurs dans l'interface
 #define RESET   "\033[0m"
