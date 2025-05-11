@@ -1,7 +1,7 @@
 #include "combat.h"
 
 // Fonction à appeler après que le personnage a joué
-void definir_prochain_tour(Personnage *perso) {
+void definir_prochain_tour(Combattant *perso) {
     // Le personnage devra attendre vitesse avant de rejouer
     perso->prochain_tour = perso->vitesse;
 }
