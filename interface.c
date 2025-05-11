@@ -4,7 +4,7 @@
 
 #define NOM_MAX 500 
 
-// Fonction pour effacer l'écran
+// Fonction portable pour effacer l'écran
 void clearScreen() {
     #ifdef _WIN32
         system("cls");
@@ -14,9 +14,9 @@ void clearScreen() {
 }
 
 //Pour sécuriser le choix entre les options 
-int lireEntierSimple(int min, int max) {
+int lireChoix(int min, int max) {
     int valeur;
-    char entree[100]; 
+    char entree[100]; // Buffer assez grand
 
     while (1) {
         if (fgets(entree, sizeof(entree), stdin) == NULL) {
@@ -46,6 +46,19 @@ const char* getEmoji(Element element) {
     }
 }
 
+//afficher fin de jeu
+void finJeu(){
+    clearScreen();
+    printf("\n\n\n");
+    printf("===================================\n");
+    printf("  ===  ");
+    printf(ROUGE "A la prochaine 👋 !" RESET);
+    printf("  ===\n");
+    printf("===================================\n");
+    sleep(2);
+    clearScreen();
+}
+
 
 //afficher titre 
 void debutJeu() {
@@ -72,7 +85,7 @@ int choixPrincipal() {
 
     printf("Choisissez une option (1 ou 2):\n");
     printf(">> ");
-    choix = lireEntierSimple(1, 2);
+    choix = lireChoix(1, 2);
 
     clearScreen();
     return choix;
@@ -90,7 +103,7 @@ int choixModeJeu() {
     printf("2. Jouer contre Joueur 2\n");
 
     printf(">> ");
-    mode = lireEntierSimple(1, 2);
+    mode = lireChoix(1, 2);
 
     clearScreen();
     return mode;
@@ -124,7 +137,7 @@ void afficheCombattants(Combattant* tab, int taille) {
         Combattant c = tab[i];
 
         if (c.pv == -1) {
-            printf(" (%d)" NOIR" %s" RESET" %s ❌Déjà choisi\n", i + 1, c.nom, getEmoji(c.element));
+            printf(" (%d)" NOIR" %s %s ❌Déjà choisi\n"RESET, i + 1, c.nom, getEmoji(c.element));
         } else {
             printf(" (%d)" BEIGE" %s" RESET" %s\n", i + 1, c.nom, getEmoji(c.element));
         
@@ -161,12 +174,7 @@ void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* 
             printf(BLANC"\nChoisissez votre combattant n°%d (1 à %d):\n"RESET, i + 1, *taille_dispo);
             printf(">> ");
 
-            if (scanf("%d", &choix) != 1) {
-                printf(ROUGE"⚠️ Saisie invalide. Veuillez entrer un nombre.\n"RESET);
-                while(getchar() != '\n');
-                choix = -1;
-                continue;
-            }
+            choix = lireChoix(1, *taille_dispo);
 
             if (choix < 1 || choix > *taille_dispo) {
                 printf(ROUGE"⚠️ Vous devez choisir un nombre entre 1 et %d !\n"RESET, *taille_dispo);
@@ -189,44 +197,49 @@ void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* 
 
 //choix combattants joueur contre joueur
 void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Combattant* equipeJ1, Combattant* equipeJ2, int taille_equipe) {
-    int choix;
-
     for (int i = 0; i < taille_equipe; i++) {
         // Tour du Joueur 1
         clearScreen();
         afficheCombattants(disponibles, *taille_dispo);
+        printf(BLANC"Joueur 1, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
+        printf(">> ");
+
+        int choixJ1;
         do {
-            printf(BLANC"Joueur 1, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
-            printf(">> ");
-            scanf("%d", &choix);
-        } while(choix < 1 || choix > *taille_dispo || disponibles[choix-1].pv == -1);
+            choixJ1 = lireChoix(1, *taille_dispo);
+            if (disponibles[choixJ1-1].pv == -1) {
+                printf(ROUGE "Combattant déjà pris. Nouveau choix : " RESET);
+            }
+        } while(disponibles[choixJ1-1].pv == -1);
 
-        equipeJ1[i] = disponibles[choix - 1];
-        disponibles[choix - 1].pv = -1;
+        equipeJ1[i] = disponibles[choixJ1 - 1];
+        disponibles[choixJ1 - 1].pv = -1;
 
-        clearScreen();
-        printf("\n\n\n");
-        printf(VERT" ✅%s %s a été ajouté à l'équipe du Joueur 1!🥊\n"RESET, equipeJ1[i].nom, getEmoji(equipeJ1[i].element));
-        sleep(2);
-
-        // Tour du Joueur 2
+        // Tour du Joueur 2 (identique mais pour J2)
         clearScreen();
         afficheCombattants(disponibles, *taille_dispo);
+        printf(BLANC"Joueur 2, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
+        printf(">> ");
+
+        int choixJ2;
         do {
-            printf(BLANC"Joueur 2, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
-            printf(">> ");
-            scanf("%d", &choix);
-        } while(choix < 1 || choix > *taille_dispo || disponibles[choix-1].pv == -1);
+            choixJ2 = lireChoix(1, *taille_dispo);
+            if (disponibles[choixJ2-1].pv == -1) {
+                printf(ROUGE "Combattant déjà pris. Nouveau choix : " RESET);
+            }
+        } while(disponibles[choixJ2-1].pv == -1);
 
-        equipeJ2[i] = disponibles[choix - 1];
-        disponibles[choix - 1].pv = -1;
+        equipeJ2[i] = disponibles[choixJ2 - 1];
+        disponibles[choixJ2 - 1].pv = -1;
 
+        // Affichage récapitulatif
         clearScreen();
-        printf("\n\n\n");
-        printf(VERT" ✅%s %s a été ajouté à l'équipe du Joueur 2!🥊\n"RESET, equipeJ2[i].nom, getEmoji(equipeJ2[i].element));
+        printf(VERT"\nJoueur 1: %s %s ajouté!\n", equipeJ1[i].nom, getEmoji(equipeJ1[i].element));
+        printf("Joueur 2: %s %s ajouté!\n"RESET, equipeJ2[i].nom, getEmoji(equipeJ2[i].element));
         sleep(2);
     }
 }
+
 
 // affciche l'équipe 
 void afficherEquipe(Combattant* equipe, int taille_equipe) {
@@ -268,8 +281,3 @@ void jeuCommence() {
     printf("\n\n\n");
     printf("   ===  " ROUGE "Le jeu va commencer🎮! " RESET "  ===\n");
 }
-
-
-
-
-
