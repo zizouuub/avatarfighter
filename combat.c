@@ -105,7 +105,6 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
                 if (cible->pv < 0){ 
                 cible->pv = 0;
                 cible->est_KO = 1;
-                printf("❌ %s est KO !\n", cible->nom);
                 }
                 printf("⚡ %s utilise %s et inflige %.2f dégâts à %s !\n", attaquant->nom, tech->nom, degats, cible->nom);
             break;
