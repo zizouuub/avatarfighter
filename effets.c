@@ -153,7 +153,7 @@ void attaque_elementaire(Combattant *attaquant, Combattant *cible, TechniqueSpec
     }
     printf("%s utilise %s sur %s infligeant %.2f dégâts (pv restants : %f)\n",
            attaquant->nom, tech->nom, cible->nom, degats, cible->pv);
-    attaquant->temps_recharge = tech->tours;
+    attaquant->temps_recharge[2] = tech->tours;
 }
 
 
