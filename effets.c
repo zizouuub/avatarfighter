@@ -81,6 +81,7 @@ void appliquerDegats(Combattant *c) {
             c->pv -= degats;
             printf("☠️ %s subit %.1f points de dégâts de poison !\n", c->nom, degats);
             c->duree_effet[i]--;
+        }
         switch (c->effets[i]) { // On applique l'effet de la première case (peut être amélioré pour gérer plusieurs effets)
             case GEL:
                 // Le combattant est gelé et ne pourra pas agir pendant un tour
@@ -108,6 +109,7 @@ void appliquerDegats(Combattant *c) {
 }
 
 
+
 //fct pour mettre à jour les effets de tous les combattants
 void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
      if (c == NULL){
@@ -129,6 +131,8 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
             }
         }
     }
+
+    
     // Réduire la durée de tous les effets actifs et appliquer si nécessaire
     for (int i = 0; i < NB_EFFETS; i++) {
         if (c->effets[i] != AUCUN && c->duree_effet[i] > 0) {
@@ -154,7 +158,7 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         }
     }
 }
-}
+
 
 
 // Retourne un multiplicateur de dégâts selon l'élément
