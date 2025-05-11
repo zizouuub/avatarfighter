@@ -71,15 +71,17 @@ void appliquerDegats(Combattant *c) {
         return;
     }
     for (int i = 0; i < NB_EFFETS; i++) { // On parcourt chaque effet actif du combattant
+        if (c->effets[i] == BRULURE && c->duree_effet[i] > 0) {
+            float degats = c->pv_max * 0.05; // 5% des PV max
+            c->pv -= degats;
+            printf("🔥 %s subit %.1f points de dégâts de brûlure !\n", c->nom, degats);
+            c->duree_effet[i]--;
+        }else if (c->effets[i] == POISON && c->duree_effet[i] > 0) {
+            float degats = c->pv_max * 0.03; // 3% des PV max
+            c->pv -= degats;
+            printf("☠️ %s subit %.1f points de dégâts de poison !\n", c->nom, degats);
+            c->duree_effet[i]--;
         switch (c->effets[i]) { // On applique l'effet de la première case (peut être amélioré pour gérer plusieurs effets)
-            case POISON: // Le poison inflige 10 PV de dégâts par tour
-                c->pv -= 10;
-                printf("%s subit 10 points de dégâts à cause du poison !\n", c->nom);
-                break;
-            case BRULURE:  // La brûlure inflige 15 PV de dégâts par tour
-                c->pv -= 15;
-                printf("%s est brûlé et perd 15 points de vie !\n", c->nom);
-                break;
             case GEL:
                 // Le combattant est gelé et ne pourra pas agir pendant un tour
                 printf("%s est gelé et ne pourra pas agir ce tour-ci !\n", c->nom);
@@ -129,15 +131,22 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
     }
     // Réduire la durée de tous les effets actifs et appliquer si nécessaire
     for (int i = 0; i < NB_EFFETS; i++) {
-        if (c->effets[i] != AUCUN) {  // Si l'effet est actif
-            c->duree_effet[i]--;  // On diminue la durée de l'effet d'un tour
-            if (c->duree_effet[i] <= 0) {  // Si l'effet est terminé
-                printf("L'effet %s sur %s prend fin.\n", nomEffets[c->effets[i]], c->nom);
-                c->effets[i] = AUCUN;  // Supprimer l'effet
-                c->duree_effet[i] = 0;  // Remettre la durée à 0
+        if (c->effets[i] != AUCUN && c->duree_effet[i] > 0) {
+            if (c->effets[i] == GEL) {
+                printf("❄️ %s est gelé et ne peut pas agir ! (%d tours restants)\n", 
+                      c->nom, c->duree_effet[i]);
+                c->duree_effet[i]--;
             }
+            else if (c->effets[i] == STUN) {
+                printf("💫 %s est étourdi et ne peut pas agir ! (%d tours restants)\n", 
+                      c->nom, c->duree_effet[i]);
+                c->duree_effet[i]--;
+            }
+            // On ne décrémente pas la durée ici pour BRULURE et POISON
+            // car on veut qu'ils fassent des dégâts avant de disparaître
         }
     }
+}
 }
 
 
