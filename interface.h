@@ -5,7 +5,7 @@
 #include "type.h"
 #define MAX_PERSOS 100 
 
-//pour les couleurs dans le terminale 
+//pour les couleurs dans l'interface
 #define RESET   "\033[0m"
 #define ROUGE     "\033[1;31m"
 #define VERT   "\033[1;32m"
@@ -30,5 +30,6 @@ const char* getEffetNom(EffetType effet);
 const char* getEmoji(Element element);
 const char* getElementNom(Element elem);
 void afficheTousLesCombattants(Combattant* combattants, int nbCombattants);
+void jeuCommence(void);
 
 #endif
