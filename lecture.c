@@ -28,7 +28,7 @@ EffetType convertirEffetType(const char *effetStr) {
     return AUCUN;
 }
 
-int chargerCombattants(const char* nom_fichier, Combattant* persos) {
+int charger_combattants(const char *nom_fichier, Combattant *persos, int max_persos) {
     FILE *fichier = fopen(nom_fichier, "r");
 
     //vérification si le fichier est ouvert
