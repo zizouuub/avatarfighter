@@ -1,7 +1,6 @@
-===========================
+=
  CY-FIGHTERS 2025 - README 
-===========================
-
+=
 Instructions pour lancer le jeu :
 
 1. Ouvrir un terminal dans le dossier du projet.
