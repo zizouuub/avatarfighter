@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include "effets.h"
 #include "type.h" 
-#include "time.h"
+#include <string.h>
+#include <time.h>
 
 
 // Fonction pour initialiser le combat
