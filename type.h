@@ -27,8 +27,8 @@ typedef struct {
 typedef struct {
     char nom[MAX_STR];                       // Nom
     Element element;                         // Élément (Feu, Eau...)
-    int pv_max;                              // PV max
-    int pv;                                  // PV actuels
+    float pv_max;                              // PV max
+    float pv;                                  // PV actuels
     int attaque;                             // Attaque
     int defense;                             // Défense
     int agilite;                             // Agilité
@@ -40,3 +40,4 @@ typedef struct {
     int temps_recharge[MAX_TECHS]; // nombre de tours restants avant de réutiliser la technique
     int prochain_tour; // nombre de tours à attendre avant de rejouer (lié à vitesse)
 } Combattant;
+
