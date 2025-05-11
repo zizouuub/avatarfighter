@@ -12,7 +12,7 @@ int choisir_combattant(Combattant *equipe, int taille) {
         printf("Choisissez un combattant actif :\n");
         for (int i = 0; i < taille; i++) {
             if (!equipe[i].est_KO && equipe[i].prochain_tour <= 0) {
-                printf("%d. %s (PV: %d)\n", i, equipe[i].nom, equipe[i].pv);
+                printf("%d. %s (PV: %.2f)\n", i, equipe[i].nom, equipe[i].pv);
             }
         }
         scanf("%d", &choix);
@@ -26,7 +26,7 @@ int choisir_cible(Combattant *equipe, int taille) {
         printf("Choisissez une cible :\n");
         for (int i = 0; i < taille; i++) {
             if (!equipe[i].est_KO) {
-                printf("%d. %s (PV: %d)\n", i, equipe[i].nom, equipe[i].pv);
+                printf("%d. %s (PV: %.2f)\n", i, equipe[i].nom, equipe[i].pv);
             }
         }
         scanf("%d", &choix);
@@ -88,7 +88,7 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
         printf("❌ %s est KO !\n", cible->nom);
     } else {
         // Affiche le résultat du coup
-        printf("💥 %s inflige %.2f dégâts à %s (reste %d PV)\n", attaquant->nom, degats, cible->nom, cible->pv);
+        printf("💥 %s inflige %.2f dégâts à %s (reste %.2f PV)\n", attaquant->nom, degats, cible->nom, cible->pv);
     }
 }
 
@@ -132,18 +132,18 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
             break;
         case DEFENSE:
             attaquant->defense += tech->puissance;
-            printf("🛡️ %s renforce sa défense avec %s (+%d) !\n", attaquant->nom, tech->nom, tech->puissance);
+            printf("🛡️ %s renforce sa défense avec %s (+%.2f) !\n", attaquant->nom, tech->nom, tech->puissance);
             break;
         case AGILITE:
             attaquant->agilite += tech->puissance;
-            printf("💨 %s augmente son agilité avec %s (+%d) !\n", attaquant->nom, tech->nom, tech->puissance);
+            printf("💨 %s augmente son agilité avec %s (+%.2f) !\n", attaquant->nom, tech->nom, tech->puissance);
             break;
         case SOIN:
             attaquant->pv += tech->puissance;
             if (attaquant->pv > attaquant->pv_max){
                 attaquant->pv = attaquant->pv_max;
             }
-            printf("🧪 %s se soigne avec %s et récupère %d PV !\n", attaquant->nom, tech->nom, tech->puissance);
+            printf("🧪 %s se soigne avec %s et récupère %.2f PV !\n", attaquant->nom, tech->nom, tech->puissance);
             break;
         case STUN:
             appliquerEffetElementaire(cible, *tech);
