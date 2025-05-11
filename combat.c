@@ -99,6 +99,19 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
         attaque_normale(attaquant, cible);
         return;
     }
+    // Vérifier si la technique est déjà prête à être utilisée (temps_recharge == 0)
+    for (int i = 0; i < MAX_TECHS; i++) {
+        if (attaquant->techniques[i].nom == tech->nom) {
+            // On ne peut pas utiliser la technique si son temps de recharge n'est pas écoulé
+            if (attaquant->temps_recharge[i] > 0) {
+                printf("❌ La technique %s est en recharge et ne peut pas être utilisée ce tour !\n", tech->nom);
+                return;
+            }
+            // Sinon, on définit le temps de recharge de la technique à la valeur de 'tours' de la technique
+            attaquant->temps_recharge[i] = tech->tours;  // Assigner le nombre de tours de recharge
+            break;
+        }
+    }
     float degats = 0; // Initialisation des dégâts
     switch (tech->effet) {
         case ATTAQUE:
@@ -183,6 +196,8 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     if (cible != NULL) {
         utiliserTechnique(joueur, cible, &joueur->techniques[0]); // Utilise la première technique
     }
+    // Mise à jour du prochain tour après l'utilisation de la technique
+    definir_prochain_tour(joueur);
 }
 
 void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
