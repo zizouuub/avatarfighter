@@ -7,6 +7,14 @@
 #include <string.h>
 #include <time.h>
 
+// Fonction à appeler après que le personnage a joué
+void definir_prochain_tour(Personnage *perso);
+
+int choisir_combattant(Combattant *equipe, int taille) ;
+
+int choisir_cible(Combattant *equipe, int taille);
+
+void maj_tours_combattants(Combattant *equipe, int taille);
 
 // Fonction pour initialiser le combat
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
