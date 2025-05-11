@@ -17,18 +17,37 @@
 #define BEIGE "\033[38;5;230m"
 
 //protoype des fonctions 
+void clearScreen(void);
+
+int lireEntierSimple(int min, int max);
+
 void debutJeu(void);
+
 int choixPrincipal(void);
+
 int choixModeJeu(void);
-void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* equipe, int taille_equipe);
+
+void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, 
+
+Combattant* equipe, int taille_equipe);
+
 void afficheCombattants(Combattant* combattant, int nbCombattants);
+
 void afficherEquipe(Combattant* equipe, int taille_equipe);
-void choisirEquipeAleatoire(Combattant* disponibles, int taille_dispo, Combattant* equipe, int taille_equipe);
+
+void choisirEquipeAleatoire(Combattant* disponibles, int 
+taille_dispo, Combattant* equipe, int taille_equipe);
+
 void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Combattant* equipeJ1, Combattant* equipeJ2, int taille_equipe);
+
 const char* getEffetNom(EffetType effet);
+
 const char* getEmoji(Element element);
+
 const char* getElementNom(Element elem);
+
 void afficheTousLesCombattants(Combattant* combattants, int nbCombattants);
+
 void jeuCommence(void);
 
 #endif
