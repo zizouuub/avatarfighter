@@ -10,10 +10,13 @@
 // Fonction à appeler après que le personnage a joué
 void definir_prochain_tour(Combattant *perso);
 
+// Fonction pour choisir un combattant actif
 int choisir_combattant(Combattant *equipe, int taille) ;
 
+// Fonction pour choisir une cible
 int choisir_cible(Combattant *equipe, int taille);
 
+// Fonction pour mettre à jour les tours des combattants
 void maj_tours_combattants(Combattant *equipe, int taille);
 
 // Fonction pour initialiser le combat
@@ -30,8 +33,6 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
 
 // Fonction pour choisir une action (attaquer ou utiliser une technique)
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires);
-
-void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
 
 // Fonction pour gérer le combat entre deux équipes
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
