@@ -1,16 +1,25 @@
 #include "combat.h"
 
-// Fonction à appeler après que le personnage a joué
+// Fonction à appeler après que le personnage a joué , Définit le nombre de tours à attendre avant que le personnage puisse rejouer
 void definir_prochain_tour(Combattant *perso) {
+    if (perso == NULL){ // securité 
+        return;
+    }
     // Le personnage devra attendre vitesse avant de rejouer
     perso->prochain_tour = perso->vitesse;
 }
 
+
+// Permet au joueur de choisir un combattant valide dans son équipe
 int choisir_combattant(Combattant *equipe, int taille) {
+    if (equipe == NULL || taille <= 0){
+        return -1;
+    }
     int choix = -1;
     do {
         printf("Choisissez un combattant actif :\n");
         for (int i = 0; i < taille; i++) {
+            // Affiche seulement les combattants valides
             if (!equipe[i].est_KO && equipe[i].prochain_tour <= 0) {
                 printf("%d. %s (PV: %.2f)\n", i, equipe[i].nom, equipe[i].pv);
             }
@@ -20,7 +29,12 @@ int choisir_combattant(Combattant *equipe, int taille) {
     return choix;
 }
 
+
+// Permet de choisir une cible valide parmi les adversaires
 int choisir_cible(Combattant *equipe, int taille) {
+    if (equipe == NULL || taille <= 0){
+        return -1;
+    }
     int choix = -1;
     do {
         printf("Choisissez une cible :\n");
@@ -34,11 +48,18 @@ int choisir_cible(Combattant *equipe, int taille) {
     return choix;
 }
 
+
+//Met à jour les compteurs de tours pour tous les combattants
 void maj_tours_combattants(Combattant *equipe, int taille) {
+    if (equipe == NULL || taille <= 0){
+        return;
+    }
     for (int i = 0; i < taille; i++) {
+        // Décrémente le compteur de tour si nécessaire
         if (equipe[i].prochain_tour > 0){
             equipe[i].prochain_tour--;
         }
+        // Décrémente les temps de recharge des techniques
         for (int j = 0; j < MAX_TECHS; j++) {
             if (equipe[i].temps_recharge[j] > 0){
                 equipe[i].temps_recharge[j]--;
@@ -47,8 +68,12 @@ void maj_tours_combattants(Combattant *equipe, int taille) {
     }
 }
 
-// Fonction pour initialiser le combat
+
+// Fonction initialise l'état d'un combat entre deux équipes
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
+    if (equipe1 == NULL || equipe2 == NULL || taille1 <= 0 || taille2 <= 0){
+        return;
+    }
     // Initialisation des compteurs de tour et des effets
     for (int i = 0; i < taille1; i++) {
         initialiser_combattant(&equipe1[i]);
@@ -60,8 +85,12 @@ void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, i
     }
 }
 
+
 // fct pour vérifier si une equipe est KO
 int equipe_est_KO(Combattant *equipe, int taille) {
+    if (equipe == NULL || taille <= 0){
+        return 1;  // Équipe invalide considérée comme KO
+    }
     for (int i = 0; i < taille; i++) {
         if (!equipe[i].est_KO) { //choisir le premier qui n’est pas K.O
             return 0;  // L'equipe n'est pas KO
@@ -72,6 +101,9 @@ int equipe_est_KO(Combattant *equipe, int taille) {
 
 // Calcule les dégâts en fonction de l'attaque, la défense, et l'element
 void attaque_normale(Combattant *attaquant, Combattant *cible) {
+    if (attaquant == NULL || cible == NULL){
+        return;
+    }
     float degats = attaquant->attaque;
     // Réduction des dégâts par la défense (mais minimum 1 point de dégât)
     degats = degats - (cible->defense / 2.0);
@@ -93,7 +125,12 @@ void attaque_normale(Combattant *attaquant, Combattant *cible) {
     }
 }
 
+
+// fonction utilise une technique spéciale sur une cible
 void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpeciale *tech) {
+    if (attaquant == NULL || cible == NULL ){
+        return;
+    }
     if (tech == NULL) {
         // attaque normale
         attaque_normale(attaquant, cible);
@@ -116,7 +153,8 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
     switch (tech->effet) {
         case ATTAQUE:
                 degats = tech->puissance;
-                if (tech->puissance > 20) {
+            // Bonus supplémentaire pour les fortes attaques    
+            if (tech->puissance > 20) {
                     degats += 20;
                 } else if (tech->puissance > 10) {
                     degats += 10;
@@ -141,7 +179,6 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
                 printf("🛡️ %s utilise %s (sans bonus) !\n", attaquant->nom, tech->nom);
             }
         break;
-    
             case SOIN:
                 attaquant->pv += tech->puissance;
                 if (attaquant->pv > attaquant->pv_max) {
@@ -178,8 +215,13 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
     }
 }
 
+
 // Un joueur effectue une action pendant son tour
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires) { 
+    if (joueur == NULL || adversaires == NULL || taille_adversaires <= 0){
+        return;
+    }
+    // Vérification des incapacités
     if (joueur->est_KO) {
         printf("⚠️ %s est KO et ne peut pas agir !\n", joueur->nom);
         return;
@@ -196,6 +238,7 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     printf("\n🔵 Tour de %s (PV: %.1f/%.1f)\n", joueur->nom, joueur->pv, joueur->pv_max);
     // Afficher les cibles disponibles
     printf("Choisissez une cible :\n");
+    //choix de la cible 
     int nb_cibles_valides = 0;
     for (int i = 0; i < taille_adversaires; i++) {
         if (!adversaires[i].est_KO) {
