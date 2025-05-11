@@ -1,6 +1,6 @@
 Nom: Zuko
 Element: FEU
-PV_max: 80
+PV_max: 80.0
 Attaque: 30
 Defense: 10
 Agilite: 5
@@ -26,7 +26,7 @@ Description: Zuko déclenche une explosion de flammes intenses qui inflige des b
 
 Nom: Azula
 Element: FEU
-PV_max: 70
+PV_max: 70.0
 Attaque: 22
 Defense: 8
 Agilite: 6
@@ -52,7 +52,7 @@ Description: Azula génère un brasier intense qui brule tout sur son passage, i
 
 Nom: Katara
 Element: EAU
-PV_max: 90
+PV_max: 90.0
 Attaque: 15
 Defense: 12
 Agilite: 6
@@ -78,7 +78,7 @@ Description: Katara utilise l'eau pour geler une zone, ralentissant l'ennemi et 
 
 Nom: Sokka
 Element: EAU
-PV_max: 100
+PV_max: 100.0
 Attaque: 18
 Defense: 20
 Agilite: 5
@@ -104,7 +104,7 @@ Description: Sokka invoque une tempête de neige qui ralentit tous les ennemis d
 
 Nom: Toph
 Element: TERRE
-PV_max: 110
+PV_max: 110.0
 Attaque: 18
 Defense: 25
 Agilite: 3
@@ -130,7 +130,7 @@ Description: Toph frappe violemment le sol, provoquant un tremblement de terre q
 
 Nom: Kyashi
 Element: TERRE
-PV_max: 100
+PV_max: 100.0
 Attaque: 20
 Defense: 20
 Agilite: 4
@@ -156,7 +156,7 @@ Description: Kyashi génère une onde de choc souterraine qui envoie ses ennemis
 
 Nom: Aang
 Element: AIR
-PV_max: 70
+PV_max: 70.0
 Attaque: 20
 Defense: 8
 Agilite: 8
@@ -182,7 +182,7 @@ Description: Aang génère une tornade qui envoie des éclats de poison, affecta
 
 Nom: Sahn
 Element: AIR
-PV_max: 65
+PV_max: 65.0
 Attaque: 26
 Defense: 6
 Agilite: 7
