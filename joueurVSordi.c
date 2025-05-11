@@ -15,6 +15,10 @@ int choisir_action_joueur() {
     return choix;
 }
 
+int choisir_cible_ia(Combattant *ennemi) {
+    return 0; // Un seul ennemi dans 1v1
+}
+
 int choisir_cible(Combattant *equipe, int taille) {
     int choix;
     for (int i = 0; i < taille; i++) {
@@ -69,11 +73,11 @@ void attaque_elementaire(Combattant *attaquant, Combattant *cible) {
 }
 
 // Simule l’utilisation d’une technique spéciale 
-void utiliser_technique(Combattant *source, Combattant *cible, int indice_tech) {
-    TechniqueSpeciale tech = source->techniques[indice_tech];
+void utiliser_technique(Combattant *source, Combattant *cible, int indice) {
+    TechniqueSpeciale tech = source->techniques[indice];
     printf("✨ %s utilise %s !\n", source->nom, tech.nom);
     appliquerEffetElementaire(cible, tech);
-    source->temps_recharge[indice_tech] = tech.tours;
+    source->temps_recharge[indice] = tech.tours;
 }
 
 void tour(Combattant *joueur, Combattant *ia, int taille_adv, int est_joueur) {
