@@ -1,6 +1,6 @@
-
-== CY-FIGHTERS 2025 - README ==
-
+===========================
+ CY-FIGHTERS 2025 - README 
+===========================
 
 Instructions pour lancer le jeu :
 
