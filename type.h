@@ -1,4 +1,4 @@
-#define MAX_STR 50
+#define MAX_STR 80
 #define MAX_TECHS 3      // Nombre de techniques par personnage
 #define NB_EFFETS 8     // Nombre d'effets possibles
 
