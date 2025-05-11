@@ -7,19 +7,19 @@ Agilite: 5
 Vitesse: 2
 Technique: Jet de flamme
 Type: ATTAQUE
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 0
 Description: Zuko lance un jet de flammes infligeant des dégâts modérés.
 Technique: Mur de feu
 Type: DEFENSE
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 2
 Description: Zuko crée un mur de flammes pour bloquer les attaques.
 Technique: Explosion ardente
 Type: BRULURE
-Puissance: 22
+Puissance: 22.0
 Portée: 2
 Tours: 5
 Description: Zuko déclenche une explosion de flammes qui inflige des brûlures.
@@ -33,19 +33,19 @@ Agilite: 6
 Vitesse: 2
 Technique: Double flamme
 Type: ATTAQUE
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 0
 Description: Azula tire deux jets de flammes simultanés.
 Technique: Danse infernale
 Type: SOIN
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 3
 Description: Azula exécute une danse enflammée qui permet de soigner.
 Technique: Brasier
 Type: BRULURE
-Puissance: 25
+Puissance: 25.0
 Portée: 2
 Tours: 4
 Description: Azula génère un brasier intense qui brule tout sur son passage.
@@ -59,19 +59,19 @@ Agilite: 6
 Vitesse: 1
 Technique: Lame d’eau
 Type: ATTAQUE
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 0
 Description: Katara crée une lame tranchante d'eau qu'elle lance.
 Technique: Vague curative
 Type: SOIN
-Puissance: 18
+Puissance: 18.0
 Portée: 0
 Tours: 2
 Description: Katara forme une vague d'eau magique qui soigne ses alliés.
 Technique: Gel profond
 Type: GEL
-Puissance: 12
+Puissance: 12.0
 Portée: 1
 Tours: 4
 Description: Katara utilise l'eau pour geler une zone, ralentissant l'ennemi.
@@ -85,19 +85,19 @@ Agilite: 5
 Vitesse: 1
 Technique: Aiguilles de glace
 Type: ATTAQUE
-Puissance: 14
+Puissance: 14.0
 Portée: 0
 Tours: 0
 Description: Sokka lance des aiguilles de glace acérées, infligeant des dégâts.
 Technique: Barrière polaire
 Type: DEFENSE
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 3
 Description: Sokka crée une barrière de glace autour de lui ou de ses alliés les protegeant.
 Technique: Blizzard
 Type: GEL
-Puissance: 22
+Puissance: 22.0
 Portée: 2
 Tours: 4
 Description: Sokka invoque une tempête de neige qui ralentit tous les ennemis.
@@ -111,19 +111,19 @@ Agilite: 3
 Vitesse: 2
 Technique: Poing rocheux
 Type: ATTAQUE
-Puissance: 20
+Puissance: 20.0
 Portée: 0
 Tours: 0
 Description: Toph frappe le sol avec une force brutale, créant des pierres qui frappent ses ennemis.
 Technique: Bouclier de pierre
 Type: DEFENSE
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 4
 Description: Toph érige un bouclier de pierres solides autour de ses alliés, les protégeant des attaques.
 Technique: Séisme
 Type: STUN
-Puissance: 18
+Puissance: 18.0
 Portée: 1
 Tours: 5
 Description: Toph frappe violemment le sol, provoquant un tremblement de terre qui sonne ses ennemis, les empêchant d'agir pendant un tour.
@@ -137,19 +137,19 @@ Agilite: 4
 Vitesse: 2
 Technique: Coup durci
 Type: ATTAQUE
-Puissance: 16
+Puissance: 16.0
 Portée: 0
 Tours: 0
 Description: Kyashi frappe son ennemi avec un coup renforcé de terre, infligeant des dégâts.
 Technique: Armure vivante
 Type: SOIN
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 3
 Description: Kyashi transforme son corps en armure de pierre, soignant les blessures.
 Technique: Onde tellurique
 Type: STUN
-Puissance: 25
+Puissance: 25.0
 Portée: 2
 Tours: 4
 Description: Kyashi génère une onde de choc souterraine qui envoie ses ennemis au sol, les rendant incapables de bouger.
@@ -163,19 +163,19 @@ Agilite: 8
 Vitesse: 1
 Technique: Coup de vent
 Type: ATTAQUE
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 0
 Description: Aang lance un coup de vent puissant, attaquant un ennemi tout en lui infligeant des dégats.
 Technique: Vent vitalisant
 Type: SOIN
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 3
 Description: Aang utilise son air pour se soigner.
 Technique: Tornade
 Type: POISON
-Puissance: 20
+Puissance: 20.0
 Portée: 2
 Tours: 4
 Description: Aang génère une tornade qui envoie des éclats de poison, rendant impossible d'agir pendant 2 tours.
@@ -189,19 +189,19 @@ Agilite: 7
 Vitesse: 2
 Technique: Frappe tournoyante
 Type: ATTAQUE
-Puissance: 15
+Puissance: 15.0
 Portée: 0
 Tours: 2
 Description: Sahn exécute une frappe tournoyante avec une grande rapidité.
 Technique: Silence du ciel
 Type: DEFENSE
-Puissance: 12
+Puissance: 12.0
 Portée: 0
 Tours: 3
 Description: Sahn invoque une brise silencieuse autour de lui qui neutralise les attaques.
 Technique: Typhon
 Type: POISON
-Puissance: 25
+Puissance: 25.0
 Portée: 2
 Tours: 4
 Description: Sahn crée un typhon dévastateur qui projette des éclats de poison, reduisant ses capacités à contre-attaquer.
