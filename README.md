@@ -1,16 +1,16 @@
-===============================
-  CY-FIGHTERS 2025 - README
-===============================
+
+== CY-FIGHTERS 2025 - README ==
+
 
 Instructions pour lancer le jeu :
 
 1. Ouvrir un terminal dans le dossier du projet.
 
 2. Compiler le programme :
-   >> make
+   > make
 
 3. Lancer le jeu :
-   >> ./exec
+   > ./exec
 
 4. Suivre les indications affichées à l'écran.
 
