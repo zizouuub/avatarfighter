@@ -19,7 +19,7 @@
 //protoype des fonctions 
 void clearScreen(void);
 
-int lireEntierSimple(int min, int max);
+int lireChoix(int min, int max);
 
 void debutJeu(void);
 
