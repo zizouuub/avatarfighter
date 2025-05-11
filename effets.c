@@ -144,6 +144,19 @@ float multiplicateur(Element attaquant, Element defenseur) {
 }
 
 
+void attaque_elementaire(Personnage *attaquant, Personnage *cible, Technique *tech) {
+    float mult = multiplicateur(tech->element, cible->element); // Utilise la fonction existante
+    int degats = tech->puissance * mult;
+
+    cible->pv -= degats;
+    if (cible->pv < 0){ 
+        cible->pv = 0;
+    }
+    printf("%s utilise %s sur %s infligeant %d dégâts (pv restants : %d)\n",
+           attaquant->nom, tech->nom, cible->nom, degats, cible->pv);
+}
+
+
 int est_incapacite(Combattant *c) {
     for (int i = 0; i < NB_EFFETS; i++) {
         if ((c->effets[i] == GEL || c->effets[i] == STUN) && c->duree_effet[i] > 0) {
