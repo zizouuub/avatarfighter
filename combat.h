@@ -8,7 +8,7 @@
 #include <time.h>
 
 // Fonction à appeler après que le personnage a joué
-void definir_prochain_tour(Personnage *perso);
+void definir_prochain_tour(Combattant *perso);
 
 int choisir_combattant(Combattant *equipe, int taille) ;
 
