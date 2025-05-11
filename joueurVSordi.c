@@ -30,11 +30,16 @@ int choisir_cible(Combattant *equipe, int taille) {
     return choix;
 }
 
-int choisir_action_ia(Combattant ia) {
-    if (ia.recharge == 0 && ia.pv < 30) {
-        return 2; // tente une technique spéciale
+int choisir_action_ia(Combattant *ia, Combattant *joueur) {
+    if (niveau_ia == 0 || niveau_ia == 1) {
+        return 1;  // Noob ou Facile = attaque normale
+    } else if (niveau_ia == 2) {
+        int tech = technique_disponible(ia);
+        if (tech != -1){
+            return 2;  // Technique dispo
+        }
     }
-    return 1; // attaque simple
+    return 1;
 }
 
 int choisir_cible_ia(Combattant *equipe, int taille) {
@@ -56,6 +61,13 @@ int technique_disponible(Combattant *c) {
     return -1;
 }
 
+void attaque_elementaire(Combattant *attaquant, Combattant *cible) {
+    // Appelle à l’attaque selon éléments
+    printf("🔥 %s attaque %s !\n", attaquant->nom, cible->nom);
+    // Appelle ta fonction de calcul selon l'élément ici
+    attaque_normale(attaquant, cible); 
+}
+
 // Simule l’utilisation d’une technique spéciale 
 void utiliser_technique(Combattant *source, Combattant *cible, int indice_tech) {
     TechniqueSpeciale tech = source->techniques[indice_tech];
@@ -65,25 +77,28 @@ void utiliser_technique(Combattant *source, Combattant *cible, int indice_tech) 
 }
 
 void tour(Combattant *joueur, Combattant *ia, int taille_adv, int est_joueur) {
-    int action, cible;
-    if(joueur->pv <= 0){
+    int action;
+    if(joueur->est_KO){
         return;
     }
     printf("\n🔁 Tour de %s\n", joueur->nom);
+    action = 1;
     if (est_joueur) {
         action = choisir_action_joueur();
-        cible = choisir_cible(ia, taille_adv);
-        if (action == 1) {
-            attaque_elementaire(joueur, &ia[cible]);
-    } else {
-        action = choisir_action_ia(*ia);
-        cible = choisir_cible_ia(joueur, taille_adv);
-        printf("🤖 L'IA choisit l'action %d\n", action);
+    }else{
+        action = choisir_action_ia(joueur, ia);
+        printf("🤖 L’IA choisit l’action %d\n", action);
     }
     if (action == 1) {
         attaque_normale(joueur, &ia[cible]);
     } else {
-        utiliser_technique(joueur, &ia[cible]);
+        int tech = technique_disponible(acteur);
+        if (tech != -1) {
+            utiliser_technique(acteur, adversaire, tech_idx);
+        } else {
+            printf("❌ Aucune technique disponible ! Attaque normale...\n");
+            attaque_elementaire(acteur, adversaire);
+        }
     }
 }
 
@@ -94,12 +109,10 @@ int equipe_est_KO(Combattant *equipe, int taille) {
     return 1;
 }
 
-void maj_recharge(Combattant *equipe, int taille) {
-    for (int i = 0; i < taille; i++) {
-        for (int j = 0; j < MAX_TECHS; j++) {
-            if (equipe[i].temps_recharge[j] > 0)
-                equipe[i].temps_recharge[j]--;
-        }
+void maj_recharge(Combattant *c) {
+    for (int i = 0; i < MAX_TECHS; i++) {
+        if (c->temps_recharge[i] > 0)
+            c->temps_recharge[i]--;
     }
 }
 
@@ -108,14 +121,18 @@ void lancer_combat(Combattant *joueur, Combattant *ia, int taille) {
     scanf("%d", &niveau_ia);
     printf("🔥⚔️ Début du combat entre %s et %s !\n", joueur->nom, ia->nom);
     while (!joueur->est_KO && !equipe_est_KO(equipe_ia, taille_ia)) {
-        tour_combat(joueur, equipe_ia, taille_ia, 1);
-        for (int i = 0; i < taille_ia; i++) {
-            if (!equipe_ia[i].est_KO){
-                tour_combat(&equipe_ia[i], &joueur, 1, 0);  // Taille = 1 car 1 joueur
-            }
+        tour(joueur, ia, 1);
+        if (ia->pv <= 0) {
+            ia->est_KO = 1;
+            return;
         }
-        maj_recharge(&joueur, 1);
-        maj_recharge(equipe_ia, taille_ia);
+        tour(ia, joueur, 0);
+        if (joueur->pv <= 0) {
+            joueur->est_KO = 1;
+            return;
+        }
+         maj_recharge(joueur);
+         maj_recharge(ia);
     }
     if (joueur->est_KO) {
         printf("💀 Vous êtes K.O. L'IA gagne !\n");
