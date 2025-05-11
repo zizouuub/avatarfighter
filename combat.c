@@ -1,5 +1,11 @@
 #include "combat.h"
 
+// Fonction à appeler après que le personnage a joué
+void definir_prochain_tour(Personnage *perso) {
+    // Le personnage devra attendre vitesse avant de rejouer
+    perso->prochain_tour = perso->vitesse;
+}
+
 int choisir_combattant(Combattant *equipe, int taille) {
     int choix = -1;
     do {
@@ -30,10 +36,13 @@ int choisir_cible(Combattant *equipe, int taille) {
 
 void maj_tours_combattants(Combattant *equipe, int taille) {
     for (int i = 0; i < taille; i++) {
-        if (equipe[i].prochain_tour > 0) equipe[i].prochain_tour--;
+        if (equipe[i].prochain_tour > 0){
+            equipe[i].prochain_tour--;
+        }
         for (int j = 0; j < MAX_TECHS; j++) {
-            if (equipe[i].temps_recharge[j] > 0)
+            if (equipe[i].temps_recharge[j] > 0){
                 equipe[i].temps_recharge[j]--;
+            }
         }
     }
 }
