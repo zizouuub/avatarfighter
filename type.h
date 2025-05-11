@@ -25,7 +25,7 @@ typedef enum {
 typedef struct {
     char nom[MAX_STR];       // Nom de la technique
     char type[MAX_STR];      // Type (attaque, défense...)
-    int puissance;           // Dégâts ou valeur de l'effet
+    float puissance;           // Dégâts ou valeur de l'effet
     int portee;              // Portée
     int tours;               // Durée de l'effet
     EffetType effet;         // Type d'effet appliqué (ex : POISON, BRULURE...)
