@@ -142,7 +142,7 @@ Portée: 0
 Tours: 0
 Description: Kyashi frappe son ennemi avec un coup renforcé de terre, infligeant des dégâts modérés tout en augmentant ses défenses pour un tour.
 Technique: Armure vivante
-Type: CONTRE
+Type: SOIN
 Puissance: 12
 Portée: 1
 Tours: 3
