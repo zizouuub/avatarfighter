@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "type.h"
+
 #include "lecture.h"
-#include "effet.h"
+
 
 // Supprimer le saut de ligne à la fin d'une chaîne
 void supprimer_saut_ligne(char *str) {
