@@ -15,36 +15,37 @@ int choisir_action_joueur() {
     return choix;
 }
 
-
 Combattant* choisir_cible_soin(Combattant *equipe, int taille) {
-    Combattant *cible = NULL;
-    float min_pv = 9999;
+    Combattant *plus_blesse = NULL;
+    float pourcentage_min = 1.0;  // 100%
     for (int i = 0; i < taille; i++) {
-        if (!equipe[i].est_KO && equipe[i].pv < min_pv && equipe[i].pv > 0) {
-            cible = &equipe[i];
-            min_pv = equipe[i].pv;
+        if (!equipe[i].est_KO && equipe[i].pv < equipe[i].pv_max) {
+            float pourcentage = equipe[i].pv / equipe[i].pv_max;
+            if (pourcentage < pourcentage_min) {
+                pourcentage_min = pourcentage;
+                plus_blesse = &equipe[i];
+            }
         }
     }
-    return cible;
+    return plus_blesse;
 }
 
 
 int choisir_cible1(Combattant *equipe, int taille) {
-    int choix;
+    int choix = -1;
+    printf("Choisissez une cible :\n");
     for (int i = 0; i < taille; i++) {
-        if (equipe[i].pv > 0){
-            printf("%d. %s (PV: %.1f)\n", i, equipe[i].nom, equipe[i].pv);
+        if (!equipe[i].est_KO) {
+            printf("%d. %s (PV: %.2f)\n", i, equipe[i].nom, equipe[i].pv);
         }
     }
-    printf("Choisissez une cible : ");
     scanf("%d", &choix);
     while (choix < 0 || choix >= taille || equipe[choix].est_KO) {
-        printf("⛔ Cible invalide. Réessayez : ");
+        printf("⛔ Choix invalide. Réessayez : ");
         scanf("%d", &choix);
     }
     return choix;
 }
-
 
 Combattant* choisir_cible_faible(Combattant *ennemis, int taille) {
     Combattant *cible = NULL;
@@ -60,12 +61,9 @@ Combattant* choisir_cible_faible(Combattant *ennemis, int taille) {
 
 
 Combattant* choisir_cible_attaque(Combattant *equipe, int taille) {
-    if (niveau_ia == 0) {
+    if (niveau_ia == 1) {
         return choisir_cible_aleatoire(equipe, taille);
-    } else if (niveau_ia == 1) {
-        return choisir_cible_faible(equipe, taille);
     } else {
-        // niveau 2 : choisir celui avec le plus de dégâts potentiels, ou par défaut le plus faible
         return choisir_cible_faible(equipe, taille);
     }
 }
@@ -81,20 +79,23 @@ Combattant* choisir_cible_aleatoire(Combattant *equipe, int taille) {
 
 int technique_disponible(Combattant *c) {
     for (int i = 0; i < MAX_TECHS; i++) {
-        if (c->temps_recharge[i] == 0)
-            return i;
+        if (c->temps_recharge[i] <= 0) {
+            return 1;
+        }
     }
-    return -1;
+    return 0;
 }
 
 
 int choisir_action_ia(Combattant *ia) {
-    if (niveau_ia == 2 && technique_disponible(ia) != -1) {
-        return 2;
+    if (niveau_ia == 0) {
+        return rand() % 2 + 1; // action aléatoire (1 ou 2)
     }
-    return 1;
+    if (technique_disponible(ia)) {
+        return 2; // utilise sa technique si elle est prête
+    }
+    return 1; // sinon attaque normale
 }
-
 
 void attaque_elementaire1(Combattant *attaquant, Combattant *cible) {
     // Appelle à l’attaque selon éléments
@@ -106,10 +107,9 @@ void attaque_elementaire1(Combattant *attaquant, Combattant *cible) {
 
 // Simule l’utilisation d’une technique spéciale 
 void utiliser_technique(Combattant *source, Combattant *cible, int indice) {
-    TechniqueSpeciale tech = source->techniques[indice];
-    printf("✨ %s utilise %s !\n", source->nom, tech.nom);
-    appliquerEffetElementaire(cible, tech);
-    source->temps_recharge[indice] = tech.tours;
+    if (indice >= 0 && indice < MAX_TECHS) {
+        utiliserTechnique(source, cible, &source->techniques[indice]);
+    }
 }
 
 
@@ -179,6 +179,7 @@ void lancer_combat(Combattant *equipe_joueur, int taille_joueur, Combattant *equ
             maj_recharge(&equipe_ia[i]);
         }
     }
+    printf("\n🎮 Le combat est terminé !\n");
     if (equipe_est_KO(equipe_joueur, taille_joueur)) {
     printf("💀 Vous êtes K.O. L'IA gagne !\n");
     } else {
