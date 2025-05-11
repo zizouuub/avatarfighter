@@ -17,7 +17,7 @@ int choisir_action_joueur();
 int choisir_action_ia(Combattant *ia);
 
 // Choix d'une cible (par index) pour le joueur
-int choisir_cible(Combattant *equipe, int taille);
+int choisir_cible1(Combattant *equipe, int taille);
 
 // Choix d'une cible aléatoire pour l'IA
 Combattant* choisir_cible_aleatoire(Combattant *equipe, int taille);
@@ -35,7 +35,7 @@ Combattant* choisir_cible_soin(Combattant *equipe, int taille);
 int technique_disponible(Combattant *c);
 
 // Applique une attaque élémentaire (attaque normale + effet selon l'élément)
-void attaque_elementaire(Combattant *attaquant, Combattant *cible);
+void attaque_elementaire1(Combattant *attaquant, Combattant *cible);
 
 // Utilise une technique spéciale
 void utiliser_technique(Combattant *source, Combattant *cible, int indice);
