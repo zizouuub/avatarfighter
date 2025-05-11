@@ -72,7 +72,7 @@ int main() {
         else if (strcmp(ligne, "AIR") == 0) p.element = AIR;
 
         // Stats
-        fscanf(fichier, "PV_max: %d\n", &p.pv_max);
+        fscanf(fichier, "PV_max: %.2f\n", &p.pv_max);
         p.pv = p.pv_max;
         fscanf(fichier, "Attaque: %d\n", &p.attaque);
         fscanf(fichier, "Defense: %d\n", &p.defense);
@@ -95,7 +95,7 @@ int main() {
 
             // Puissance
             fgets(ligne, sizeof(ligne), fichier);
-            sscanf(ligne, "Puissance: %d", &p.techniques[i].puissance);
+            sscanf(ligne, "Puissance: %.2f", &p.techniques[i].puissance);
 
             // Portée
             fgets(ligne, sizeof(ligne), fichier);
@@ -118,10 +118,10 @@ int main() {
 
     // Affichage de vérification
     for (int i = 0; i < nb_persos; i++) {
-        printf("\n>> %s (%d PV, Élément: %d)\n", persos[i].nom, persos[i].pv_max, persos[i].element);
+        printf("\n>> %s (%.2f PV, Élément: %d)\n", persos[i].nom, persos[i].pv_max, persos[i].element);
         for (int j = 0; j < MAX_TECHS; j++) {
             TechniqueSpeciale *tech = &persos[i].techniques[j];
-            printf("  - %s (Effet: %d) Puissance: %d | Portée: %d | Tours: %d\n    > %s\n",
+            printf("  - %s (Effet: %d) Puissance: %.2f | Portée: %d | Tours: %d\n    > %s\n",
                    tech->nom, tech->effet, tech->puissance, tech->portee, tech->tours, tech->description);
         }
     }
