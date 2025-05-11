@@ -299,7 +299,13 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     // Mise à jour du prochain tour
     definir_prochain_tour(joueur);
 }
+
+
+//Initialise le combat entre deux équipes
 void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
+    if (equipe1 == NULL || equipe2 == NULL || taille1 <= 0 || taille2 <= 0){
+        return;
+    }
     srand(time(NULL));  // Initialisation du générateur aléatoire
     printf("Le combat commence entre deux équipes !\n");
     // Initialisation des combattants
@@ -311,6 +317,7 @@ void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int
             equipe1[i].temps_recharge[j] = 0;
         }
     }
+    //initialisation de l'equipe 2 
     for (int i = 0; i < taille2; i++) {
         equipe2[i].pv = equipe2[i].pv_max;
         equipe2[i].est_KO = 0;
@@ -322,8 +329,11 @@ void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int
 }
 
 
-// Gère l'ensemble du combat entre deux équipes
+// Gère l'ensemble du combat entre deux équipes, boucle principale du combat
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
+    if (equipe1 == NULL || equipe2 == NULL || taille1 <= 0 || taille2 <= 0){
+        return;
+    }
     int tour = 1;
     // Initialisation des combattants
     initialiser_comb(equipe1, taille1, equipe2, taille2);
