@@ -29,7 +29,7 @@ Combattant* choisir_cible_soin(Combattant *equipe, int taille) {
 }
 
 
-int choisir_cible(Combattant *equipe, int taille) {
+int choisir_cible1(Combattant *equipe, int taille) {
     int choix;
     for (int i = 0; i < taille; i++) {
         if (equipe[i].pv > 0){
@@ -96,7 +96,7 @@ int choisir_action_ia(Combattant *ia) {
 }
 
 
-void attaque_elementaire(Combattant *attaquant, Combattant *cible) {
+void attaque_elementaire1(Combattant *attaquant, Combattant *cible) {
     // Appelle à l’attaque selon éléments
     printf("🔥 %s attaque %s !\n", attaquant->nom, cible->nom);
     // Appelle ta fonction de calcul selon l'élément ici
@@ -123,7 +123,7 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie, Co
     Combattant *cible = NULL;
     if (est_joueur) {
         action = choisir_action_joueur();
-        cible = &equipe_ennemie[choisir_cible(equipe_ennemie, taille_ennemie)]; // En 1v1, une seule cible
+        cible = &equipe_ennemie[choisir_cible1(equipe_ennemie, taille_ennemie)]; // En 1v1, une seule cible
     }else{
         action = choisir_action_ia(acteur);
         if (action == 2) {
@@ -151,15 +151,6 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie, Co
     }
 }
 
-
-int equipe_est_KO(Combattant *equipe, int taille) {
-    for (int i = 0; i < taille; i++) {
-        if (equipe[i].pv > 0){
-            return 0;
-        }
-    }
-    return 1;
-}
 
 
 void maj_recharge(Combattant *c) {
