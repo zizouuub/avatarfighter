@@ -7,49 +7,41 @@
 #include "combat.h"    // pour attaque_normale
 #include "effets.h"    // pour appliquerEffetElementaire
 
-// Niveau d'IA global
+// Niveau de difficulté de l'IA (0=noob, 1=facile, 2=moyen)
 int niveau_ia;
 
-// Sélection de l'action pour le joueur (1 = attaque normale, 2 = technique spéciale)
-int choisir_action_joueur();
+// Affiche l'état d'un combattant
+void afficher_etat_combattant(Combattant *c);
 
-// Sélection de l'action pour l'IA
-int choisir_action_ia(Combattant *ia);
-
-// Choix d'une cible (par index) pour le joueur
-int choisir_cible1(Combattant *equipe, int taille);
-
-// Choix d'une cible aléatoire pour l'IA
+// Choisit une cible aléatoire parmi les combattants non-KO
 Combattant* choisir_cible_aleatoire(Combattant *equipe, int taille);
 
-// Choix de la cible la plus faible (PV les plus bas)
+// Choisit la cible avec le moins de PV
 Combattant* choisir_cible_faible(Combattant *equipe, int taille);
 
-// Choix intelligent de la cible selon le niveau de l'IA
+// Choisit une cible selon la stratégie de l'IA
 Combattant* choisir_cible_attaque(Combattant *equipe, int taille);
 
-// Choix de la cible à soigner
+// Choisit un allié à soigner (celui avec le plus bas pourcentage de PV)
 Combattant* choisir_cible_soin(Combattant *equipe, int taille);
 
-// Vérifie si une technique spéciale est disponible
+// Vérifie si une technique est disponible
 int technique_disponible(Combattant *c);
 
-// Applique une attaque élémentaire (attaque normale + effet selon l'élément)
-void attaque_elementaire1(Combattant *attaquant, Combattant *cible);
+// Choisit l'action pour l'IA
+int choisir_action_ia(Combattant *ia);
 
-// Utilise une technique spéciale
-void utiliser_technique(Combattant *source, Combattant *cible, int indice);
-
-// Exécute un tour pour un combattant (joueur ou IA)
+// Gère le tour d'un combattant (joueur ou IA)
 void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie, Combattant *equipe_alliee, int taille_alliee, int est_joueur);
 
-// Vérifie si une équipe est complètement K.O.
-int equipe_est_KO(Combattant *equipe, int taille);
-
-// Met à jour le temps de recharge des techniques spéciales
+// Met à jour les temps de recharge des techniques
 void maj_recharge(Combattant *c);
 
-// Démarre le combat entre deux équipes
+// Fonction pour choisir une cible ennemie
+int choisir_cible1(Combattant *equipe, int taille);
+
+// Fonction principale pour lancer le combat
 void lancer_combat(Combattant *equipe_joueur, int taille_joueur, Combattant *equipe_ia, int taille_ia);
 
 #endif
+
