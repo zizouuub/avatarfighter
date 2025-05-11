@@ -211,10 +211,11 @@ void afficher_etat_combattant(Combattant *c) {
         return;
     }
     printf("%s: PV %.1f/%.1f [", c->nom, c->pv, c->pv_max);
+    int j;
     int premier = 1;
-    for (int j = 0; j < NB_EFFETS; j++) {
+    for (j = 0; j < NB_EFFETS; j++) {
         if (c->effets[j] != AUCUN && c->duree_effet[j] > 0) {
-            if (!premier) {
+            if (premier == 0) {
                 printf(", ");
             }
             if (c->effets[j] == POISON) {
@@ -225,14 +226,34 @@ void afficher_etat_combattant(Combattant *c) {
                 printf("GEL");
             } else if (c->effets[j] == STUN) {
                 printf("STUN");
+            } else if (c->effets[j] == SOIN) {
+                printf("SOIN");
+            } else if (c->effets[j] == ATTAQUE) {
+                printf("ATQ+");
+            } else if (c->effets[j] == DEFENSE) {
+                printf("DEF+");
+            } else if (c->effets[j] == AGILITE) {
+                printf("AGI+");
             } else {
-                printf("AUTRE");
+                printf("EFFET");
             }
             printf("(%d)", c->duree_effet[j]);
             premier = 0;
         }
     }
-    printf("]\n");
+    printf("] | Techniques: ");
+    int i;
+    for (i = 0; i < MAX_TECHS; i++) {
+        if (c->techniques[i].nom[0] != '\0') {
+            printf("%s", c->techniques[i].nom);
+            if (c->temps_recharge[i] > 0) {
+                printf("(temps de recharge :%d) ", c->temps_recharge[i]);
+            } else {
+                printf("(Prêt) ");
+            }
+        }
+    }
+    printf("\n");
 }
 
 void lancer_combat(Combattant *equipe_joueur, int taille_joueur, Combattant *equipe_ia, int taille_ia) {
