@@ -178,13 +178,13 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie,
                     tech_dispo[nb_tech_dispo] = i;
                     printf("%d. %s (", nb_tech_dispo + 1, acteur->techniques[i].nom);
                     if (acteur->techniques[i].effet == ATTAQUE) {
-                        printf("ATTAQUE:%f", acteur->techniques[i].puissance);
+                    printf("ATTAQUE:%.1f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == SOIN) {
-                        printf("SOIN:%f", acteur->techniques[i].puissance);
+                     printf("SOIN:%.1f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == DEFENSE) {
-                        printf("DEFENSE%f", acteur->techniques[i].puissance);
+                     printf("DEFENSE:%.1f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == AGILITE) {
-                        printf("AGILITE%f", acteur->techniques[i].puissance);
+                    printf("AGILITE:%.1f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == BRULURE) {
                         printf("BRULURE");
                     } else if (acteur->techniques[i].effet == GEL) {
