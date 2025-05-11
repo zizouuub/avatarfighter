@@ -38,7 +38,7 @@ Portée: 0
 Tours: 0
 Description: Azula tire deux jets de flammes simultanés, attaquant deux ennemis ou infligeant des dégâts plus importants à un seul.
 Technique: Danse infernale
-Type: AGILITE
+Type: SOIN
 Puissance: 12
 Portée: 0
 Tours: 3
@@ -168,7 +168,7 @@ Portée: 0
 Tours: 0
 Description: Aang lance un coup de vent puissant, attaquant un ennemi tout en lui infligeant des dégâts modérés.
 Technique: Esquive absolue
-Type: AGILITE
+Type: SOIN
 Puissance: 15
 Portée: 1
 Tours: 3
