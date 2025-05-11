@@ -1,7 +1,8 @@
-#include "type.h" // toutes les bibliothèques dans type.h
-#define MAX_PERSOS 100 
-//pour le main 
 
+#ifndef INTERFACE_H
+#define INTERFACE_H
+
+#include "type.h"
 
 //pour les couleurs dans l'interface
 #define RESET   "\033[0m"
@@ -12,16 +13,43 @@
 #define NOIR   "\033[1;30m"
 #define CYAN   "\033[1;36m"
 #define BLANC  "\033[1;37m"
+#define VIOLET "\033[1;35m"
+#define BEIGE "\033[38;5;230m"
 
 //protoype des fonctions 
-void debutJeu();
-int choixPrincipal();
-int choixModeJeu();
-int chargerCombattants(const char* nom_fichier, Combattant* persos);
-void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* equipe, int taille_equipe);
-void afficheCombattants(Combattant* tab, int nb_combattants);
-void afficherEquipe(Combattant* equipe, int taille);
-void choisirEquipe(Combattant* tous, int nb_combattants, Combattant* equipe, int taille);
-void choisirEquipeAleatoire(Combattant* tous, int nb_combattants, Combattant* equipe, int taille);
+void clearScreen(void);
+
+int lireEntierSimple(int min, int max);
+
+void debutJeu(void);
+
+int choixPrincipal(void);
+
+int choixModeJeu(void);
+
+void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, 
+
+Combattant* equipe, int taille_equipe);
+
+void afficheCombattants(Combattant* combattant, int nbCombattants);
+
+void afficherEquipe(Combattant* equipe, int taille_equipe);
+
+void choisirEquipeAleatoire(Combattant* disponibles, int 
+taille_dispo, Combattant* equipe, int taille_equipe);
+
 void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Combattant* equipeJ1, Combattant* equipeJ2, int taille_equipe);
+
 const char* getEffetNom(EffetType effet);
+
+const char* getEmoji(Element element);
+
+const char* getElementNom(Element elem);
+
+void afficheTousLesCombattants(Combattant* combattants, int nbCombattants);
+
+void jeuCommence(void);
+
+void finJeu(void);
+
+#endif
