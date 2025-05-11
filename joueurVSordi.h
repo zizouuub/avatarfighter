@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "combat.h"  // Pour attaque_normale
-#include "effets.h"  // Pour appliquerEffetElementaire
-
 #ifndef JOUEURVSORDI_H
 #define JOUEURVSORDI_H
 
