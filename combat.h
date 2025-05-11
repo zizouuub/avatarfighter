@@ -7,34 +7,53 @@
 #include <string.h>
 #include <time.h>
 
-// Fonction à appeler après que le personnage a joué
-void definir_prochain_tour(Combattant *perso);
-
-// Fonction pour choisir un combattant actif
-int choisir_combattant(Combattant *equipe, int taille) ;
-
-// Fonction pour choisir une cible
-int choisir_cible(Combattant *equipe, int taille);
-
-// Fonction pour mettre à jour les tours des combattants
-void maj_tours_combattants(Combattant *equipe, int taille);
-
-// Fonction pour initialiser le combat
+// Initialise les données des deux équipes (PV, effets, etc.)
 void initialiser_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
 
-// Fonction pour vérifier si une équipe est KO
-int equipe_est_KO(Combattant *equipe, int taille);
+// Affiche une introduction au combat (et initialise le random)
+void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
 
-// Fonction pour calculer les dégâts d'une attaque normale  
+// -------------------------
+// MISE À JOUR DES COMBATTANTS
+// -------------------------
+
+// Met à jour les compteurs de tour et de recharge des techniques
+void maj_tours_combattants(Combattant *equipe, int taille);
+
+// Définit quand le personnage pourra rejouer
+void definir_prochain_tour(Combattant *perso);
+
+// -------------------------
+// CHOIX DU JOUEUR
+// -------------------------
+
+// Permet de choisir un combattant actif parmi l'équipe
+int choisir_combattant(Combattant *equipe, int taille);
+
+// Permet de choisir une cible parmi l'équipe adverse
+int choisir_cible(Combattant *equipe, int taille);
+
+// -------------------------
+// ACTIONS EN COMBAT
+// -------------------------
+
+// Effectue une attaque normale (calcul de dégâts, etc.)
 void attaque_normale(Combattant *attaquant, Combattant *cible);
 
-// Fonction pour utiliser une technique spéciale
+// Utilise une technique spéciale (attaque, soin, effet, etc.)
 void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpeciale *tech);
 
-// Fonction pour choisir une action (attaquer ou utiliser une technique)
+// Réalise un tour pour un combattant (choisit une action)
 void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adversaires);
 
-// Fonction pour gérer le combat entre deux équipes
+// -------------------------
+// CONTRÔLE DU COMBAT
+// -------------------------
+
+// Vérifie si toute une équipe est KO
+int equipe_est_KO(Combattant *equipe, int taille);
+
+// Gère toute la boucle du combat entre deux équipes
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2);
 
-#endif
+#endif // COMBAT_H
