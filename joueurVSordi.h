@@ -38,10 +38,9 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie, Co
 void maj_recharge(Combattant *c);
 
 // Fonction pour choisir une cible ennemie
-int choisir_cible1(Combattant *equipe, int taille);
+Combattant* choisir_cible1(Combattant *equipe, int taille);
 
 // Fonction principale pour lancer le combat
 void lancer_combat(Combattant *equipe_joueur, int taille_joueur, Combattant *equipe_ia, int taille_ia);
 
 #endif
-
