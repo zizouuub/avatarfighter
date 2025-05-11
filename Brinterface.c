@@ -14,7 +14,7 @@ void clearScreen() {
 }
 
 //Pour sécuriser le choix entre les options 
-int lireEntierSimple(int min, int max) {
+int lireChoix(int min, int max) {
     int valeur;
     char entree[100]; // Buffer assez grand
 
