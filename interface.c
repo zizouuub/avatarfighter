@@ -172,7 +172,7 @@ void choisirEquipeAleatoire(Combattant* disponibles, int taille_dispo, Combattan
         disponibles[indice].pv = -1;
 
         const char* emoji = getEmoji(equipe[i].element);
-        printf("%s %s\n", equipe[i].nom, emoji);
+        printf("    - %s %s\n", equipe[i].nom, emoji);
         sleep(1);
     }
 }
@@ -199,6 +199,7 @@ void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Comb
         afficheCombattants(disponibles, *taille_dispo);
         do {
             printf(BLANC"Joueur 1, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
+            printf(">> ");
             scanf("%d", &choix);
             if (choix < 1 || choix > *taille_dispo || disponibles[choix-1].pv == -1)
                 printf(ROUGE"⚠️ Choix invalide. Réessayez.\n"RESET);
@@ -215,6 +216,7 @@ void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Comb
         afficheCombattants(disponibles, *taille_dispo);
         do {
             printf(BLANC"Joueur 2, choisissez votre combattant n°%d (1 à %d):\n"RESET, i+1, *taille_dispo);
+            printf(">> ");
             scanf("%d", &choix);
             if (choix < 1 || choix > *taille_dispo || disponibles[choix-1].pv == -1)
                 printf(ROUGE"⚠️ Choix invalide. Réessayez.\n"RESET);
@@ -226,4 +228,13 @@ void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Comb
         sleep(1);
         printf("\033[H\033[2J");
     }
+}
+
+//jeu commence 
+void jeuCommence(){
+       sleep(3);
+         printf("\033[H\033[2J");
+         printf("   ===  ");
+         printf(ROUGE "Le jeu va commencer🎮! " RESET);
+         printf("  ===\n");
 }
