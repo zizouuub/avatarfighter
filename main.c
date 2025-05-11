@@ -5,7 +5,7 @@
 #include "interface.h"
 #include "type.h"
 #include "lecture.h"
-#include "effet.h"
+#include "effets.h"
 
 int main(){
     srand(time(NULL));
