@@ -101,7 +101,7 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
     }
     // Vérifier si la technique est déjà prête à être utilisée (temps_recharge == 0)
     for (int i = 0; i < MAX_TECHS; i++) {
-        if (attaquant->techniques[i].nom == tech->nom) {
+        if (strcmp(attaquant->techniques[i].nom == tech->nom)==0) {
             // On ne peut pas utiliser la technique si son temps de recharge n'est pas écoulé
             if (attaquant->temps_recharge[i] > 0) {
                 printf("❌ La technique %s est en recharge et ne peut pas être utilisée ce tour !\n", tech->nom);
