@@ -6,7 +6,7 @@
 #include <string.h>
 #include "effets.h"
 
-#define MAX_PERSOS 10
+#define MAX_PERSOS 8
 
 
 // Charge les combattants depuis un fichier
@@ -19,3 +19,4 @@ EffetType convertirEffetType(const char *effetStr);
 void supprimer_saut_ligne(char *str);
 
 #endif
+
