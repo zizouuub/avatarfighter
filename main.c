@@ -15,7 +15,7 @@ int main(){
     Combattant tab_combattants[MAX_PERSOS];
 
     // Chargement des combattants depuis le fichier
-    int nb_combattants = chargerCombattants("fichier.txt", tab_combattants);
+    int nb_combattants = charger_combattants("fichier.txt", tab_combattants, MAX_PERSOS);
     if (nb_combattants <= 0) {
         printf(ROUGE "Erreur: Aucun combattant chargé.\n" RESET);
         return 1;
