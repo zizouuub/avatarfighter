@@ -19,7 +19,7 @@
 //protoype des fonctions 
 void clearScreen(void);
 
-int lireEntierSimple(int min, int max);
+int lireChoix(int min, int max);
 
 void debutJeu(void);
 
@@ -49,5 +49,7 @@ const char* getElementNom(Element elem);
 void afficheTousLesCombattants(Combattant* combattants, int nbCombattants);
 
 void jeuCommence(void);
+
+void finJeu(void);
 
 #endif
