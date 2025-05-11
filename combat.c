@@ -272,8 +272,6 @@ void initialiser_comb(Combattant *equipe1, int taille1, Combattant *equipe2, int
 
 // Gère l'ensemble du combat entre deux équipes
 void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
-    void boucle_de_combat(Combattant *equipe1, int taille1, Combattant *equipe2, int taille2) {
-    printf("\n💥 🎮 Début du combat !\n");
     int tour = 1;
     // Initialisation des combattants
     initialiser_comb(equipe1, taille1, equipe2, taille2);
