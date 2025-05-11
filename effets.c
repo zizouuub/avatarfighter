@@ -93,7 +93,6 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         printf("%s est KO et ne peut pas agir !\n", c->nom);
         return; // Le combattant est KO, on ne fait rien
     }
-
     // Appliquer les effets de la technique spéciale
     if (tech != NULL && tech->effet != AUCUN) {
         // Définir la durée de l'effet basée sur la portée
@@ -105,7 +104,6 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
             }
         }
     }
-
     // Réduire la durée de tous les effets actifs et appliquer si nécessaire
     for (int i = 0; i < NB_EFFETS; i++) {
         if (c->effets[i] != AUCUN) {  // Si l'effet est actif
@@ -143,15 +141,19 @@ float multiplicateur(Element attaquant, Element defenseur) {
 
 
 void attaque_elementaire(Combattant *attaquant, Combattant *cible, TechniqueSpeciale *tech) {
+    if (attaquant->temps_recharge > 0) {
+        printf("%s est en recharge !\n", attaquant->nom);
+        return;
+    }
     float mult = multiplicateur(attaquant->element, cible->element); // Utilise la fonction existante
     float degats = tech->puissance * mult;
-
     cible->pv -= degats;
     if (cible->pv < 0){ 
         cible->pv = 0;
     }
     printf("%s utilise %s sur %s infligeant %.2f dégâts (pv restants : %f)\n",
            attaquant->nom, tech->nom, cible->nom, degats, cible->pv);
+    attaquant->temps_recharge = tech->tours;
 }
 
 
