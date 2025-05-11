@@ -33,8 +33,7 @@ int main(){
         printf("Vous allez maintenant choisir vos équipes de" ROUGE" 3 combattants"RESET" !\n");
         printf("(Attention à bien remonter/descendre pour voir tous les combattants et vos équipes !)\n");
         sleep(4);
-        printf("\033[H\033[2J");
-        fflush(stdout);
+        clearScreen();
         if (mode == 1) {
             Combattant equipe_joueur[3];  // par exemple, une équipe de 3 combattants
             selectionnerEquipe(tab_combattants, &nb_combattants, equipe_joueur, 3);
@@ -46,12 +45,13 @@ int main(){
             //effacer écran
             clearScreen();
             printf("\n\n\n");
+            
             //affichage équipe joueur
             printf("\n\n      ======== " JAUNE"Votre équipe"RESET": ========\n");
             afficherEquipe(equipe_joueur, 3);
 
             //affichage équipe ordi
-            printf("\n\n      ======= " JAUNE"Equipe de l'ordinateur"RESET": =======\n");
+            printf("\n\n      ===== " JAUNE"Equipe de l'ordinateur"RESET": =====\n");
             afficherEquipe(equipe_ordi, 3);
         } else {
             // Mode joueur contre joueur
@@ -62,6 +62,7 @@ int main(){
             //effacer écran
             clearScreen();
             printf("\n\n\n");
+            
             //affichage du joueur 1
             printf("\n\n      =======" JAUNE"Equipe Joueur 1"RESET": =======\n");
             afficherEquipe(equipe_J1, 3);  
