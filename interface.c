@@ -60,7 +60,7 @@ int choixModeJeu(){
     int mode;
 
     printf(ROUGE"Je souhaite:\n"RESET);
-    printf("1. Jouer contre Ordi\n");
+    printf("1. Jouer contre Ordinateur\n");
     printf("2. Jouer contre Joueur 2\n");
     do {
         printf(">> ");
@@ -69,11 +69,11 @@ int choixModeJeu(){
 
     if (mode == 1) {
         printf("Vous avez choisi de" JAUNE" jouer contre l'ordi"RESET"👨‍💻!\n");      
-        sleep(1);
+        sleep(3);
         printf("\033[H\033[2J");
     } else {
         printf("Vous avez choisi de" JAUNE" jouer contre Joueur 2" RESET"🤼!\n");
-        sleep(1);
+        sleep(3);
         printf("\033[H\033[2J");
     }
     return mode;
@@ -114,7 +114,7 @@ void afficheCombattants(Combattant* tab, int taille) {
 
         for (int j = 0; j < MAX_TECHS; j++) {
             TechniqueSpeciale t = c.techniques[j];
-            printf("       %d. " JAUNE "%s" RESET " | Portée: "JAUNE"%d"RESET" | Puissance:"JAUNE"%d"RESET" | Tours: "JAUNE"%d\n"RESET,
+            printf("       %d. " JAUNE "%s" RESET " | Portée: "JAUNE"%d"RESET" | Puissance:"JAUNE"%.1f"RESET" | Tours: "JAUNE"%d\n"RESET,
                    j + 1, t.nom, t.portee, t.puissance, t.tours);
         }
         if(i < taille - 1){
@@ -150,7 +150,7 @@ void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* 
         disponibles[choix - 1].pv = -1;
 
         printf(VERT" %s a été ajouté à votre équipe !🥊\n"RESET, equipe[i].nom);
-        sleep(1);
+        sleep(2);
 
         if (i < taille_equipe - 1) {
             printf("\033[H\033[2J");
@@ -173,7 +173,7 @@ void choisirEquipeAleatoire(Combattant* disponibles, int taille_dispo, Combattan
 
         const char* emoji = getEmoji(equipe[i].element);
         printf("    - %s %s\n", equipe[i].nom, emoji);
-        sleep(1);
+        sleep(3);
     }
 }
 
@@ -208,7 +208,7 @@ void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Comb
         equipeJ1[i] = disponibles[choix - 1];
         disponibles[choix - 1].pv = -1;
         printf(VERT"%s %s a été ajouté à l'équipe du Joueur 1!🥊\n"RESET, equipeJ1[i].nom, emoji1);
-        sleep(1);
+        sleep(2);
         printf("\033[H\033[2J");
 
         const char* emoji2 = getEmoji(equipeJ2[i].element);
@@ -225,7 +225,7 @@ void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Comb
         equipeJ2[i] = disponibles[choix - 1];
         disponibles[choix - 1].pv = -1;
         printf(VERT"%s %s a été ajouté à l'équipe du Joueur 2!🥊\n"RESET, equipeJ2[i].nom, emoji2);
-        sleep(1);
+        sleep(2);
         printf("\033[H\033[2J");
     }
 }
