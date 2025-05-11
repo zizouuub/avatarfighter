@@ -1,6 +1,6 @@
 #define MAX_STR 50
 #define MAX_TECHS 3      // Nombre de techniques par personnage
-#define NB_EFFETS 10    // Nombre d'effets possibles
+#define NB_EFFETS 8     // Nombre d'effets possibles
 
 // Enumération pour les éléments
 typedef enum {
@@ -9,7 +9,7 @@ typedef enum {
 
 // Enumération pour les types d'effets d'une technique
 typedef enum {
-    AUCUN, ATTAQUE, DEFENSE, AGILITE, STUN, GEL, SOIN, BRULURE, CONTRE, POISON
+    AUCUN, ATTAQUE, DEFENSE, STUN, GEL, SOIN, BRULURE, POISON
 } EffetType;
 
 // Structure pour représenter une technique spéciale
