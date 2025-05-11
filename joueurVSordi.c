@@ -178,13 +178,13 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie,
                     tech_dispo[nb_tech_dispo] = i;
                     printf("%d. %s (", nb_tech_dispo + 1, acteur->techniques[i].nom);
                     if (acteur->techniques[i].effet == ATTAQUE) {
-                        printf("ATTAQUE:%d", acteur->techniques[i].puissance);
+                        printf("ATTAQUE:%f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == SOIN) {
-                        printf("SOIN:%d", acteur->techniques[i].puissance);
+                        printf("SOIN:%f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == DEFENSE) {
-                        printf("DEFENSE%d", acteur->techniques[i].puissance);
+                        printf("DEFENSE%f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == AGILITE) {
-                        printf("AGILITE%d", acteur->techniques[i].puissance);
+                        printf("AGILITE%f", acteur->techniques[i].puissance);
                     } else if (acteur->techniques[i].effet == BRULURE) {
                         printf("BRULURE");
                     } else if (acteur->techniques[i].effet == GEL) {
@@ -236,6 +236,7 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie,
                 cible = &equipe_alliee[choix_cible];
             } else {
                 cible = choisir_cible1(equipe_ennemie, taille_ennemie);
+
             }
         } else {
             cible = choisir_cible1(equipe_ennemie, taille_ennemie);
@@ -292,7 +293,7 @@ void maj_recharge(Combattant *c) {
     }
 }
 
-int choisir_cible1(Combattant *equipe, int taille) {
+Combattant* choisir_cible1(Combattant *equipe, int taille){
     int choix;
     int tentative = 0;
     int cible_valide = 0;
@@ -316,8 +317,10 @@ int choisir_cible1(Combattant *equipe, int taille) {
             cible_valide = 1;
         }
     } while (!cible_valide);
-    return choix;
+    
+    return &equipe[choix];  // Retourner un pointeur vers le combattant choisi
 }
+
 
 void lancer_combat(Combattant *equipe_joueur, int taille_joueur, 
                    Combattant *equipe_ia, int taille_ia) {
