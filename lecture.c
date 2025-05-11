@@ -88,10 +88,9 @@ int main() {
 
             // Type
             fgets(ligne, sizeof(ligne), fichier);
-            char typeStr[50];
-            sscanf(ligne, "Type: %[^\n]", typeStr);
-            supprimer_saut_ligne(typeStr);
-            p.techniques[i].effet = convertirEffetType(typeStr);
+            sscanf(ligne, "Type: %[^\n]", ligne);
+            supprimer_saut_ligne(ligne);
+            p.techniques[i].effet = convertirEffetType(ligne);
 
             // Puissance
             fgets(ligne, sizeof(ligne), fichier);
