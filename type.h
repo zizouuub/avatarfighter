@@ -40,4 +40,3 @@ typedef struct {
     int temps_recharge[MAX_TECHS]; // nombre de tours restants avant de réutiliser la technique
     int prochain_tour; // nombre de tours à attendre avant de rejouer (lié à vitesse)
 } Combattant;
-
