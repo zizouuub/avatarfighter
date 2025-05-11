@@ -3,6 +3,7 @@
 const char* nomEffets[] = {
     "Aucun", "Attaque", "Défense", "Agilité", "Stun", "Gel", "Soin", "Brûlure", "Contre", "Poison"
 };
+
 void initialiser_combattant(Combattant *c) {
     c->est_KO = 0;
     c->prochain_tour = 0;
@@ -30,7 +31,7 @@ void appliquerEffetElementaire(Combattant *cible, TechniqueSpeciale effet) {
         // effet imediat
         case SOIN:
             cible->pv += effet.puissance;
-            printf("%s récupère %d PV !\n", cible->nom, effet.puissance);
+            printf("%s récupère %.2f PV !\n", cible->nom, effet.puissance);
             if (cible->pv > cible->pv_max) cible->pv = cible->pv_max;
             break;
         default:
@@ -69,9 +70,7 @@ void appliquerDegats(Combattant *c) {
                 break;
             case ATTAQUE:
             case DEFENSE:
-            case AGILITE:
             case SOIN:
-            case CONTRE:
             case AUCUN: // Aucun effet à appliquer, donc rien à faire
             default:
                 // Aucun effet de dégâts à appliquer
@@ -144,15 +143,15 @@ float multiplicateur(Element attaquant, Element defenseur) {
 }
 
 
-void attaque_elementaire(Personnage *attaquant, Personnage *cible, Technique *tech) {
-    float mult = multiplicateur(tech->element, cible->element); // Utilise la fonction existante
-    int degats = tech->puissance * mult;
+void attaque_elementaire(Combattant *attaquant, Combattant *cible, TechniqueSpeciale *tech) {
+    float mult = multiplicateur(attaquant->element, cible->element); // Utilise la fonction existante
+    float degats = tech->puissance * mult;
 
     cible->pv -= degats;
     if (cible->pv < 0){ 
         cible->pv = 0;
     }
-    printf("%s utilise %s sur %s infligeant %d dégâts (pv restants : %d)\n",
+    printf("%s utilise %s sur %s infligeant %.2f dégâts (pv restants : %f)\n",
            attaquant->nom, tech->nom, cible->nom, degats, cible->pv);
 }
 
@@ -174,4 +173,3 @@ int tentativeEsquive(Combattant *defenseur) {
     int tirage = rand() % 100;
     return tirage < chance;
 }
-
