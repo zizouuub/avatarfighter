@@ -131,20 +131,29 @@ void utiliserTechnique(Combattant *attaquant, Combattant *cible, TechniqueSpecia
                 printf("⚡ %s utilise %s et inflige %.2f dégâts à %s !\n", attaquant->nom, tech->nom, degats, cible->nom);
             break;
         case DEFENSE:
+            printf("[DEBUG AVANT] %s - puissance=%.2f\n", tech->nom, tech->puissance); // <-- Ajoutez cette ligne
             attaquant->defense += tech->puissance;
-            printf("🛡️ %s renforce sa défense avec %s (+%.2f) !\n", attaquant->nom, tech->nom, tech->puissance);
-            break;
-        case AGILITE:
-            attaquant->agilite += tech->puissance;
-            printf("💨 %s augmente son agilité avec %s (+%.2f) !\n", attaquant->nom, tech->nom, tech->puissance);
-            break;
-        case SOIN:
-            attaquant->pv += tech->puissance;
-            if (attaquant->pv > attaquant->pv_max){
-                attaquant->pv = attaquant->pv_max;
+            printf("[DEBUG APRES] %s - puissance=%.2f\n", tech->nom, tech->puissance); // <-- Et cette ligne
+            if (tech->puissance > 0.001f) {  // Comparaison avec epsilon pour les floats
+                printf("🛡️ %s renforce sa défense avec %s (+%.1f) !\n", 
+                      attaquant->nom, tech->nom, tech->puissance);
+            } else {
+                printf("🛡️ %s utilise %s (sans bonus) !\n", attaquant->nom, tech->nom);
             }
-            printf("🧪 %s se soigne avec %s et récupère %.2f PV !\n", attaquant->nom, tech->nom, tech->puissance);
-            break;
+        break;
+    
+            case SOIN:
+                attaquant->pv += tech->puissance;
+                if (attaquant->pv > attaquant->pv_max) {
+                    attaquant->pv = attaquant->pv_max;
+                }
+                if (tech->puissance > 0.0f) {
+                    printf("🧪 %s se soigne avec %s et récupère %.2f PV !\n", 
+                       attaquant->nom, tech->nom, tech->puissance);
+                } else {
+                    printf("🧪 %s utilise %s !\n", attaquant->nom, tech->nom);
+                }
+                break;
         case STUN:
             appliquerEffetElementaire(cible, *tech);
             break;
