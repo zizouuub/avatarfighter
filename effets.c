@@ -134,16 +134,23 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
         if (c->effets[i] != AUCUN && c->duree_effet[i] > 0) {
             if (c->effets[i] == GEL) {
                 printf("❄️ %s est gelé et ne peut pas agir ! (%d tours restants)\n", 
-                      c->nom, c->duree_effet[i]);
-                c->duree_effet[i]--;
+                    c->nom, c->duree_effet[i]);
+                    c->duree_effet[i]--;
             }
             else if (c->effets[i] == STUN) {
                 printf("💫 %s est étourdi et ne peut pas agir ! (%d tours restants)\n", 
                       c->nom, c->duree_effet[i]);
                 c->duree_effet[i]--;
             }
+            else if (c->effets[i] != BRULURE && c->effets[i] != POISON) {
+                c->duree_effet[i]--;
+            }
             // On ne décrémente pas la durée ici pour BRULURE et POISON
             // car on veut qu'ils fassent des dégâts avant de disparaître
+            if (c->duree_effet[i] <= 0) {
+                c->effets[i] = AUCUN;
+                c->duree_effet[i] = 0;
+            }
         }
     }
 }
