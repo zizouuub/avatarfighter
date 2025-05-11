@@ -6,6 +6,8 @@
 #include "type.h"
 #include "lecture.h"
 #include "effets.h"
+#include "joueurVSordi.h"
+#include "combat.h"
 
 int main(){
     srand(time(NULL));
@@ -23,6 +25,14 @@ int main(){
         return 1;
     }
 
+    //déclaration des équipes 
+    Combattant equipe_joueur[3];  // une équipe de 3 combattants JOUEUR
+    Combattant equipe_ordi[3]; //une équipe de 3 combattants ORDI
+
+    Combattant equipe_J1[3]; //une équipe de 3 combattants JOUEUR 1
+    Combattant equipe_J2[3]; //une équipe de 3 combattants JOUEUR 2
+
+    
     // Affichage du menu principal
     int choix = choixPrincipal();  // Premier appel
     if (choix == 1) {
@@ -35,34 +45,33 @@ int main(){
         sleep(4);
         clearScreen();
         if (mode == 1) {
-            Combattant equipe_joueur[3];  // par exemple, une équipe de 3 combattants
+            // Mode joueur contre ordinateur
+
+            //sélection joueur
             selectionnerEquipe(tab_combattants, &nb_combattants, equipe_joueur, 3);
 
             //sélection ordi 
-            Combattant equipe_ordi[3];
             choisirEquipeAleatoire(tab_combattants, nb_combattants, equipe_ordi, 3);
 
             //effacer écran
             clearScreen();
             printf("\n\n\n");
-            
             //affichage équipe joueur
             printf("\n\n      ======== " JAUNE"Votre équipe"RESET": ========\n");
             afficherEquipe(equipe_joueur, 3);
 
             //affichage équipe ordi
-            printf("\n\n      ===== " JAUNE"Equipe de l'ordinateur"RESET": =====\n");
+            printf("\n\n      ======= " JAUNE"Equipe de l'ordinateur"RESET": =======\n");
             afficherEquipe(equipe_ordi, 3);
         } else {
             // Mode joueur contre joueur
-            Combattant equipe_J1[3];
-            Combattant equipe_J2[3];
+
+            //sélection des deux équipes
             selectionnerEquipesJoueurs(tab_combattants, &nb_combattants, equipe_J1, equipe_J2, 3);
 
             //effacer écran
             clearScreen();
             printf("\n\n\n");
-            
             //affichage du joueur 1
             printf("\n\n      =======" JAUNE"Equipe Joueur 1"RESET": =======\n");
             afficherEquipe(equipe_J1, 3);  
@@ -71,10 +80,24 @@ int main(){
             printf("\n\n      ======= " JAUNE"Equipe Joueur 2"RESET": =======\n"); 
             afficherEquipe(equipe_J2, 3);
 
-            //affichage jeu commence
-            jeuCommence();
+            
         }
-    }
 
+        //affichage jeu commence
+        jeuCommence();
+
+        //lancement du combat
+        if (mode == 1){
+            lancer_combat(equipe_joueur, 3, equipe_ordi, 3);
+        }else if (mode == 2){
+            boucle_de_combat(equipe_J1, 3, equipe_J2, 3);
+        }
+
+        
+    }
+    //quitter le jeux 
+    finJeu();
+    exit(0);
+    
     return 0;
 }
