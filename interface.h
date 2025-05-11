@@ -1,39 +1,34 @@
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
 
-#include <stdlib.h>
-#include <time.h>
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
-int afficheMenuPrincipal();
+#include "type.h"
+#define MAX_PERSOS 100 
 
-
-
-typedef enum {
-    FEU,
-    EAU,
-    TERRE,
-    AIR
-} Element;
-
-#define RESET  "\033[0m"
-#define ROUGE  "\033[1;31m"
+//pour les couleurs dans le terminale 
+#define RESET   "\033[0m"
+#define ROUGE     "\033[1;31m"
 #define VERT   "\033[1;32m"
 #define JAUNE  "\033[1;33m"
-#define BLEU   "\033[1;34m"
+#define BLEU    "\033[1;34m"
 #define NOIR   "\033[1;30m"
 #define CYAN   "\033[1;36m"
+#define BLANC  "\033[1;37m"
+#define VIOLET "\033[1;35m"
+#define BEIGE "\033[38;5;230m"
 
-
-typedef struct {
-    char nom[30];
-char titre[500];
-    Element element;
-    int pv;
-    int attaque;
-    //float vitesse;
-    int defense;
-} Combattant;
-
+//protoype des fonctions 
+void debutJeu(void);
+int choixPrincipal(void);
+int choixModeJeu(void);
 void selectionnerEquipe(Combattant* disponibles, int* taille_dispo, Combattant* equipe, int taille_equipe);
-void afficherListeCombattants(Combattant* tab, int taille);
+void afficheCombattants(Combattant* combattant, int nbCombattants);
+void afficherEquipe(Combattant* equipe, int taille_equipe);
+void choisirEquipeAleatoire(Combattant* disponibles, int taille_dispo, Combattant* equipe, int taille_equipe);
+void selectionnerEquipesJoueurs(Combattant* disponibles, int* taille_dispo, Combattant* equipeJ1, Combattant* equipeJ2, int taille_equipe);
+const char* getEffetNom(EffetType effet);
+const char* getEmoji(Element element);
+const char* getElementNom(Element elem);
+void afficheTousLesCombattants(Combattant* combattants, int nbCombattants);
+
+#endif
