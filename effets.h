@@ -30,4 +30,3 @@ int calculerDegats(Combattant *attaquant, TechniqueSpeciale *tech);
 int tentativeEsquive(Combattant *defenseur);
 
 #endif
-
