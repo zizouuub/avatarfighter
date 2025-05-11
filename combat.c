@@ -230,11 +230,16 @@ void effectuer_tour(Combattant *joueur, Combattant *adversaires, int taille_adve
     if (est_incapacite(joueur)) {
         printf("⛔ %s est incapable d'agir ce tour (gelé ou étourdi) !\n", joueur->nom);
         mettreAJourEffets(joueur, NULL);
+        appliquerDegats(joueur);  // Appliquer les dégâts même si le personnage ne peut pas agir
         return;
     }    
     // Appliquer les effets de statut
     appliquerDegats(joueur);
     mettreAJourEffets(joueur, NULL);
+    // Si le personnage est KO après avoir subi des dégâts, on arrête là
+    if (joueur->est_KO) {
+        return;
+    }
     printf("\n🔵 Tour de %s (PV: %.1f/%.1f)\n", joueur->nom, joueur->pv, joueur->pv_max);
     // Afficher les cibles disponibles
     printf("Choisissez une cible :\n");
