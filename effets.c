@@ -104,7 +104,6 @@ void mettreAJourEffets(Combattant *c, TechniqueSpeciale *tech) {
                 break;  // Sortir de la boucle après avoir appliqué l'effet
             }
         }
-        appliquerEffetElementaire(c, *tech); // Appliquer l'effet spécifique à l'élément
     }
 
     // Réduire la durée de tous les effets actifs et appliquer si nécessaire
