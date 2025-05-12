@@ -48,6 +48,7 @@ const char* getEmoji(Element element) {
 
 //afficher fin de jeu
 void finJeu(){
+    sleep(5); //a rajt 
     clearScreen();
     printf("\n\n\n");
     printf("===================================\n");
