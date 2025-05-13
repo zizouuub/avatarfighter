@@ -8,7 +8,7 @@
 #include "effets.h"    // pour appliquerEffetElementaire
 
 // Niveau de difficulté de l'IA (0=noob, 1=facile, 2=moyen)
-int niveau_ia;
+extern int niveau_ia;
 
 // Affiche l'état d'un combattant
 void afficher_etat_combattant(Combattant *c);
