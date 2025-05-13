@@ -157,10 +157,10 @@ void tour(Combattant *acteur, Combattant *equipe_ennemie, int taille_ennemie,
         return;
     }
   /*      // Vérifier si le joueur est étourdi ou gelé
-    if (est_incapacite(joueur)) {
-        printf("⛔ %s est incapable d'agir ce tour (gelé ou étourdi) !\n", joueur->nom);
-        mettreAJourEffets(joueur, NULL);
-        appliquerDegats(joueur);  // Appliquer les dégâts même si le personnage ne peut pas agir
+    if (est_incapacite(acteur)) {
+        printf("⛔ %s est incapable d'agir ce tour (gelé ou étourdi) !\n", acteur->nom);
+        mettreAJourEffets(acteur, NULL);
+        appliquerDegats(acteur);  // Appliquer les dégâts même si le personnage ne peut pas agir
         return;
     }    */
     printf("\n🔁 Tour de %s\n", acteur->nom);
