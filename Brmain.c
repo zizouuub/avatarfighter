@@ -95,6 +95,8 @@ int main(){
 
         
     }
+    //affichage de la victoire 
+    sleep(5);
     //quitter le jeux 
     finJeu();
     exit(0);
