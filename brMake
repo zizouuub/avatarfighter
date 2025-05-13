@@ -23,3 +23,6 @@ exec: main.o effets.o combat.o joueurVSordi.o interface.o lecture.o
 
 clean:
 	rm -f *.o exec./
+
+
+gcc main.c effets.c combat.c joueurVSordi.c interface.c lecture.c -o exec
