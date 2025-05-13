@@ -9,8 +9,8 @@ effets.o: effets.c effets.h
 combat.o: combat.c combat.h
 	gcc -c combat.c -o combat.o
 
-JoueurVSordi.o: JoueurVSordi.c JoueurVSordi.h
-	gcc -c JoueurVSordi.c -o JoueurVSordi.o
+joueurVSordi.o: joueurVSordi.c joueurVSordi.h
+	gcc -c joueurVSordi.c -o joueurVSordi.o
 
 interface.o: interface.c interface.h
 	gcc -c interface.c -o interface.o
@@ -18,8 +18,8 @@ interface.o: interface.c interface.h
 lecture.o: lecture.c lecture.h
 	gcc -c lecture.c -o lecture.o
 
-exec: main.o effets.o combat.o JoueurVSordi.o interface.o lecture.o
-	gcc main.o effets.o combat.o JoueurVSordi.o interface.o lecture.o -o exec
+exec: main.o effets.o combat.o joueurVSordi.o interface.o lecture.o
+	gcc main.o effets.o combat.o joueurVSordi.o interface.o lecture.o -o exec
 
 clean:
 	rm -f *.o exec
